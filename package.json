@@ -18,6 +18,11 @@
   "homepage": "https://github.com/alphagov/performanceplatform-big-screen-view",
   "devDependencies": {
     "gulp": "3.8.10",
-    "gulp-sass": "1.1.0"
+    "gulp-sass": "1.1.0",
+    "vinyl-source-stream": "1.0.0",
+    "browserify": "6.3.2"
+  },
+  "dependencies": {
+    "backbone": "1.1.2"
   }
 }
