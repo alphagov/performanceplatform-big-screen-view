@@ -5,9 +5,3 @@ the Performance Platform fullscreen on a large display, for example
 in building receptions and offices.
 
 The style was inspired by @demotive's [gds-performance-slides](https://github.com/Demotive/gds-performance-slides) ([available on Heroku](https://gds-screens-slides.herokuapp.com/)).
-
-## Stylesheets
-
-```
-sass assets/stylesheets/performanceplatform-big-screen-view.scss index.css
-```
