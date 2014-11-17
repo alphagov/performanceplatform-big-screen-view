@@ -1,3 +1,13 @@
+@import '../govuk_frontend_toolkit/stylesheets/_colours';
+@import '../govuk_frontend_toolkit/stylesheets/_typography';
+
+@import 'fonts';
+@import 'reset';
+
 body {
-  background: #f6f6f6;
+  background: $grey-2;
+}
+
+h1 {
+  @include bold-48;
 }
