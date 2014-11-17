@@ -3,12 +3,25 @@ var sass = require('gulp-sass');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var mocha = require('gulp-mocha');
+var jscs = require('gulp-jscs');
+var jshint = require('gulp-jshint');
 
 var config = {
   sassPath: './src/sass',
-  browserifyPath: './src/js',
+  jsPath: './src/js',
   testPath: './test/js'
 };
+
+gulp.task('jscs', function () {
+  return gulp.src(config.jsPath + '/*.js')
+    .pipe(jscs());
+});
+
+gulp.task('jshint', function () {
+  return gulp.src(config.jsPath + '/*.js')
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
+});
 
 gulp.task('sass', function () {
   gulp.src(config.sassPath + '/*.scss')
@@ -18,8 +31,8 @@ gulp.task('sass', function () {
     .pipe(gulp.dest('./css/fonts/'));
 });
 
-gulp.task('browserify', function() {
-  return browserify(config.browserifyPath + '/app.js')
+gulp.task('browserify', function () {
+  return browserify(config.jsPath + '/app.js')
     .bundle()
     .pipe(source('app.js'))
     .pipe(gulp.dest('./js/'));
@@ -30,9 +43,10 @@ gulp.task('test', function () {
     .pipe(mocha());
 });
 
-gulp.task('watch', function() {
+gulp.task('watch', function () {
   gulp.watch(config.sassPath + '/**/*.scss', ['sass']);
-  gulp.watch(config.browserifyPath + '/**/*.js', ['browserify']);
+  gulp.watch(config.jsPath + '/**/*.js', ['browserify']);
 });
 
-gulp.task('default', ['sass', 'browserify']);
+gulp.task('lint', ['jscs', 'jshint']);
+gulp.task('default', ['sass', 'browserify', 'lint']);
