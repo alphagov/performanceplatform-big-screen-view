@@ -12,6 +12,8 @@ gulp.task('sass', function () {
   gulp.src(config.sassPath + '/*.scss')
     .pipe(sass())
     .pipe(gulp.dest('./css'));
+  gulp.src(config.sassPath + '/fonts/*.woff')
+    .pipe(gulp.dest('./css/fonts/'))
 });
 
 gulp.task('browserify', function() {
