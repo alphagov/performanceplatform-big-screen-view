@@ -2,10 +2,12 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
+var mocha = require('gulp-mocha');
 
 var config = {
   sassPath: './src/sass',
-  browserifyPath: './src/js'
+  browserifyPath: './src/js',
+  testPath: './test/js'
 };
 
 gulp.task('sass', function () {
@@ -21,6 +23,11 @@ gulp.task('browserify', function() {
     .bundle()
     .pipe(source('app.js'))
     .pipe(gulp.dest('./js/'));
+});
+
+gulp.task('test', function () {
+  return gulp.src(config.testPath + '/*.js', {read: false})
+    .pipe(mocha());
 });
 
 gulp.task('watch', function() {
