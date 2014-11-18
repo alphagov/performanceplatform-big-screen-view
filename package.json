@@ -4,7 +4,7 @@
   "description": "This project is a JavaScript application for displaying data from the Performance Platform fullscreen on a large display, for example in building receptions and offices.",
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "gulp test"
   },
   "author": "",
   "repository": {
