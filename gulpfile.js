@@ -49,4 +49,5 @@ gulp.task('watch', function () {
 });
 
 gulp.task('lint', ['jscs', 'jshint']);
+gulp.task('production', ['sass', 'browserify']);
 gulp.task('default', ['sass', 'browserify', 'lint']);
