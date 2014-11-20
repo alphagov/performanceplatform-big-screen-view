@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var connect = require('gulp-connect')
 var sass = require('gulp-sass');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
@@ -41,6 +42,13 @@ gulp.task('browserify', function () {
 gulp.task('test', function () {
   return gulp.src(config.testPath + '/*.js', {read: false})
     .pipe(mocha());
+});
+
+gulp.task('connect', function() {
+  connect.server({
+    'fallback': 'index.html',
+    port: 8080
+  });
 });
 
 gulp.task('watch', function () {
