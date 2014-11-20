@@ -19,6 +19,26 @@ body {
   overflow: hidden;
 }
 
+h1 {
+  @include bold-48;
+}
+
+#fs {
+  width: 800px;
+  height: 600px;
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+
+  &:-webkit-full-screen {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background: none;
+  }
+}
+
 .slide {
   background-color: $govuk-blue;
   margin: 0;

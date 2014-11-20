@@ -44,7 +44,7 @@ gulp.task('test', function () {
     .pipe(mocha());
 });
 
-gulp.task('connect', function() {
+gulp.task('connect', function () {
   connect.server({
     'fallback': 'index.html',
     port: 8080
@@ -59,3 +59,4 @@ gulp.task('watch', function () {
 gulp.task('lint', ['jscs', 'jshint']);
 gulp.task('production', ['sass', 'browserify']);
 gulp.task('default', ['sass', 'browserify', 'lint']);
+gulp.task('server', ['production', 'connect', 'watch']);
