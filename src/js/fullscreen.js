@@ -10,7 +10,7 @@ module.exports = function (fsEl) {
       if (document.mozCancelFullScreen) {
         document.mozCancelFullScreen();
       } else {
-        document.webkitCancelFullScreen();
+        document.webkitExitFullscreen();
       }
     }
   };
