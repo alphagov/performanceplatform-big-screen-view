@@ -1,4 +1,3 @@
-var backbone = require('backbone');
 var carousel = require('./carousel');
 
 var dashboardSlug = window.location.pathname.split('/').pop();
