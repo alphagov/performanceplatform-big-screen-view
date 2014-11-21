@@ -5,6 +5,8 @@
 @import 'fonts';
 @import 'reset';
 
+@import '_slide_colours';
+
 html {
   @include box-sizing(border-box);
 }
@@ -25,8 +27,8 @@ h1 {
 
 #fs {
   width: 800px;
-  height: 600px;
-  margin: auto;
+  height: 500px;
+  margin: 2em auto;
   position: relative;
   overflow: hidden;
 
@@ -41,6 +43,7 @@ h1 {
 
 .slide {
   background-color: $govuk-blue;
+  color: $white;
   margin: 0;
   padding: 2em;
   height: 100%;
@@ -66,16 +69,6 @@ h1 {
     top: 100%;
     z-index: 1;
   }
-
-  &.intro-slide {
-    background-color: $govuk-blue;
-    color: $white;
-  }
-
-  &.colour-1 { background-color: $mellow-red; }
-  &.colour-2 { background-color: $turquoise; }
-  &.colour-3 { background-color: $pink; }
-  &.colour-4 { background-color: $grass-green; }
 
   h3 {
     @include bold-48;
