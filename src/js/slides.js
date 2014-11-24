@@ -11,19 +11,19 @@ module.exports = function (slideContainer) {
     'modules': [
       {
         'title': 'Digital take-up',
-        'data': '56% from 10 to 16 November'
+        'data': '56%'
       },
       {
         'title': 'User satisfaction',
-        'data': '90% from 10 to 16 November'
+        'data': '90%'
       },
       {
         'title': 'Completion rate',
-        'data': '68% from 10 to 16 November'
+        'data': '68%'
       },
       {
         'title': 'Applications breakdown',
-        'data': '6,413 from 10 to 16 November'
+        'data': '6,413'
       }
     ]
   };
@@ -31,7 +31,7 @@ module.exports = function (slideContainer) {
   var html = '';
 
   var introSlideTemplate = _.template('<h3>Performance data for <%= title %></h3><p>Data from www.gov.uk/performance</p>'),
-      slideTemplate = _.template('<h3><%= title %></h3><p><%= data %><p>https://www.gov.uk/performance/<%= dashboardSlug %></p>');
+      slideTemplate = _.template('<h3><%= dashboardTitle %></h3><p><span class="big-number"><%= data %></span><%= title.toLowerCase() %><p class="dashboard-slug">https://www.gov.uk/performance/<%= dashboardSlug %></p>');
 
   var introSlide = document.createElement('div');
   introSlide.classList.add('slide');
@@ -46,6 +46,7 @@ module.exports = function (slideContainer) {
         slide = document.createElement('div');
 
     config.dashboardSlug = dashboardConfig.slug;
+    config.dashboardTitle = dashboardConfig.title;
     slide.classList.add('slide');
     slide.innerHTML = slideTemplate(config);
     slide.classList.add(dashboardConfig.department.title.toLowerCase().replace(/ /g, '-'));
