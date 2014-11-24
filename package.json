@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "backbone": "1.1.2",
-    "govuk_frontend_toolkit": "2.0.1"
+    "underscore": "1.7.0",
+    "govuk_frontend_toolkit": "3.0.1"
   }
 }
