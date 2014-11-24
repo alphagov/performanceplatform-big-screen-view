@@ -7,10 +7,9 @@
 
 @import '_slide_colours';
 
-$preview-width: 900px;
-
 html {
   @include box-sizing(border-box);
+  height: 100%;
 }
 
 *, *:before, *:after {
@@ -28,9 +27,8 @@ h1 {
 }
 
 #fs {
-  // Big screens generally have a 16:9 aspect ratio
-  width: $preview-width;
-  height: $preview-width * (9 / 16);
+  width: 80%;
+  height: 70%;
   margin: 2em auto;
   position: relative;
   overflow: hidden;
@@ -57,9 +55,14 @@ h1 {
   background-color: $govuk-blue;
   color: $white;
   margin: 0;
-  padding: 2em;
+  padding: 4%;
+  position: relative;
   height: 100%;
   width: 100%;
+
+  @include media(tablet) {
+    padding-left: 20%;
+  }
 
   // This null translate transform is included to instruct Chrome to use
   // hardware acceleration for this element, which noticeably improves
@@ -87,6 +90,27 @@ h1 {
   }
 
   p {
-    @include core-36;
+    margin-top: 6%;
+    @include core-80;
+
+    .big-number {
+      @include bold-80;
+      font-size: 280px;
+      display: block;
+    }
+  }
+
+  .dashboard-slug {
+    @include core-24;
+    bottom: 8%;
+    position: absolute;
+  }
+
+  &.intro-slide {
+    padding-left: 4%;
+
+    p {
+      @include core-36;
+    }
   }
 }
