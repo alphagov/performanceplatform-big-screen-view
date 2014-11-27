@@ -1,58 +1,45 @@
-var _ = require('underscore');
+var _ = require('underscore'),
+  Dashboard = require('performanceplatform-client.js');
 
 module.exports = function (slideContainer) {
-  var dashboardConfig = {
-    'title': 'Carer\'s Allowance applications',
-    'slug': 'carers-allowance',
-    'department': {
-      'abbr': 'DWP',
-      'title': 'Department for Work and Pensions'
-    },
-    'modules': [
-      {
-        'title': 'Digital take-up',
-        'data': '56%'
-      },
-      {
-        'title': 'User satisfaction',
-        'data': '90%'
-      },
-      {
-        'title': 'Completion rate',
-        'data': '68%'
-      },
-      {
-        'title': 'Applications breakdown',
-        'data': '6,413'
-      }
-    ]
-  };
+  var dashboard = new Dashboard();
 
-  var html = '';
+  return dashboard.getConfig('carers-allowance').
+    then(function (dashboardConfig) {
 
-  var introSlideTemplate = _.template('<h3>Performance data for <%= title %></h3><p>Data from www.gov.uk/performance</p>'),
-      slideTemplate = _.template('<h3><%= dashboardTitle %></h3><p><span class="big-number"><%= data %></span><%= title.toLowerCase() %><p class="dashboard-slug">https://www.gov.uk/performance/<%= dashboardSlug %></p>');
+      // add dummy KPI until supplied from API
+      _.each(dashboardConfig.modules, function (module) {
+        module.data = '20%';
+      });
 
-  var introSlide = document.createElement('div');
-  introSlide.classList.add('slide');
-  introSlide.classList.add('intro-slide');
-  introSlide.classList.add('on-screen');
-  introSlide.innerHTML = introSlideTemplate(dashboardConfig);
+      var html = '';
+      var introSlideTemplate = _.template('<h1>Performance data for <%= title %></h1><p class="data-url">Data from www.gov.uk/performance</p>'),
+        slideTemplate = _.template('<h2><%= dashboardTitle %></h2><p class="content"><span class="big-number"><%= data %></span> <span class="title"><%= title.toLowerCase() %></span><p class="data-url">www.gov.uk/performance/<%= dashboardSlug %></p>');
 
-  html += introSlide.outerHTML;
+      var introSlide = document.createElement('div');
+      introSlide.classList.add('slide');
+      introSlide.classList.add('intro-slide');
+      introSlide.classList.add('on-screen');
+      introSlide.innerHTML = introSlideTemplate(dashboardConfig);
 
-  for (var module in dashboardConfig.modules) {
-    var config = dashboardConfig.modules[module],
-        slide = document.createElement('div');
+      html += introSlide.outerHTML;
 
-    config.dashboardSlug = dashboardConfig.slug;
-    config.dashboardTitle = dashboardConfig.title;
-    slide.classList.add('slide');
-    slide.innerHTML = slideTemplate(config);
-    slide.classList.add(dashboardConfig.department.title.toLowerCase().replace(/ /g, '-'));
-    html += slide.outerHTML;
-  }
+      _.each(dashboardConfig.modules, function (module) {
+        var slide = document.createElement('div');
 
-  slideContainer.innerHTML = html;
+        module.dashboardSlug = dashboardConfig.slug;
+        module.dashboardTitle = dashboardConfig.title;
+        slide.classList.add('slide');
+
+        slide.innerHTML = slideTemplate(module);
+        slide.classList.add(dashboardConfig.department.abbr.toLowerCase());
+        html += slide.outerHTML;
+      });
+
+      slideContainer.innerHTML = html;
+
+    }, function (err) {
+      throw(err);
+    });
 
 };

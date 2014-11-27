@@ -1,3 +1,119 @@
 .slide {
-  &.department-for-work-and-pensions { background-color: $department-for-work-pensions; }
+
+  &.dwp {
+    background-color: $department-for-work-pensions;
+  }
+
+  &.ago {
+    background-color: $attorney-generals-office;
+  }
+
+  &.co {
+    background-color: $cabinet-office;
+  }
+
+  &.civil-service {
+    background-color: $civil-service;
+  }
+
+  &.bis {
+    background-color: $department-for-business-innovation-skills;
+  }
+
+  &.dclg {
+    background-color: $department-for-communities-and-local-government;
+  }
+
+  &.dcms {
+    background-color: $department-for-culture-media-sport;
+  }
+
+  &.dfe {
+    background-color: $department-for-education;
+  }
+
+  &.defra {
+    background-color: $department-for-environment-food-rural-affairs;
+  }
+
+  &.dfid {
+    background-color: $department-for-international-development;
+  }
+
+  &.dft {
+    background-color: $department-for-transport;
+  }
+
+  &.decc {
+    background-color: $department-of-energy-climate-change;
+  }
+
+  &.dh {
+    background-color: $department-of-health;
+  }
+
+  &.fco {
+    background-color: $foreign-commonwealth-office;
+  }
+
+  &.government-equalities-office {
+    background-color: $government-equalities-office;
+  }
+
+  &.hm-government {
+    background-color: $hm-government;
+  }
+
+  &.hmrc {
+    background-color: $hm-revenue-customs;
+  }
+
+  &.hmt {
+    background-color: $hm-treasury;
+  }
+
+  &.ho {
+    background-color: $home-office;
+  }
+
+  &.mod {
+    background-color: $ministry-of-defence;
+  }
+
+  &.moj {
+    background-color: $ministry-of-justice;
+  }
+
+  &.nio {
+    background-color: $northern-ireland-office;
+  }
+
+  &.oag {
+    background-color: $office-of-the-advocate-general-for-scotland;
+  }
+
+  &.office-of-the-leader-of-the-house-of-lords {
+    background-color: $office-of-the-leader-of-the-house-of-lords;
+  }
+
+  &.so {
+    background-color: $scotland-office;
+  }
+
+  &.the-office-of-the-leader-of-the-house-of-commons {
+    background-color: $the-office-of-the-leader-of-the-house-of-commons;
+  }
+
+  &.ukef {
+    background-color: $uk-export-finance;
+  }
+
+  &.uk-trade-investment {
+    background-color: $uk-trade-investment;
+  }
+
+  &.wo {
+    background-color: $wales-office;
+  }
+
 }
