@@ -1,13 +1,14 @@
 .slide {
+
   &.dwp {
     background-color: $department-for-work-pensions;
   }
 
-  &.attorney-generals-office {
+  &.ago {
     background-color: $attorney-generals-office;
   }
 
-  &.cabinet-office {
+  &.co {
     background-color: $cabinet-office;
   }
 
@@ -15,43 +16,43 @@
     background-color: $civil-service;
   }
 
-  &.department-for-business-innovation-skills {
+  &.bis {
     background-color: $department-for-business-innovation-skills;
   }
 
-  &.department-for-communities-and-local-government {
+  &.dclg {
     background-color: $department-for-communities-and-local-government;
   }
 
-  &.department-for-culture-media-sport {
+  &.dcms {
     background-color: $department-for-culture-media-sport;
   }
 
-  &.department-for-education {
+  &.dfe {
     background-color: $department-for-education;
   }
 
-  &.department-for-environment-food-rural-affairs {
+  &.defra {
     background-color: $department-for-environment-food-rural-affairs;
   }
 
-  &.department-for-international-development {
+  &.dfid {
     background-color: $department-for-international-development;
   }
 
-  &.department-for-transport {
+  &.dft {
     background-color: $department-for-transport;
   }
 
-  &.department-of-energy-climate-change {
+  &.decc {
     background-color: $department-of-energy-climate-change;
   }
 
-  &.department-of-health {
+  &.dh {
     background-color: $department-of-health;
   }
 
-  &.foreign-commonwealth-office {
+  &.fco {
     background-color: $foreign-commonwealth-office;
   }
 
@@ -63,31 +64,31 @@
     background-color: $hm-government;
   }
 
-  &.hm-revenue-customs {
+  &.hmrc {
     background-color: $hm-revenue-customs;
   }
 
-  &.hm-treasury {
+  &.hmt {
     background-color: $hm-treasury;
   }
 
-  &.home-office {
+  &.ho {
     background-color: $home-office;
   }
 
-  &.ministry-of-defence {
+  &.mod {
     background-color: $ministry-of-defence;
   }
 
-  &.ministry-of-justice {
+  &.moj {
     background-color: $ministry-of-justice;
   }
 
-  &.northern-ireland-office {
+  &.nio {
     background-color: $northern-ireland-office;
   }
 
-  &.office-of-the-advocate-general-for-scotland {
+  &.oag {
     background-color: $office-of-the-advocate-general-for-scotland;
   }
 
@@ -95,7 +96,7 @@
     background-color: $office-of-the-leader-of-the-house-of-lords;
   }
 
-  &.scotland-office {
+  &.so {
     background-color: $scotland-office;
   }
 
@@ -103,7 +104,7 @@
     background-color: $the-office-of-the-leader-of-the-house-of-commons;
   }
 
-  &.uk-export-finance {
+  &.ukef {
     background-color: $uk-export-finance;
   }
 
@@ -111,7 +112,7 @@
     background-color: $uk-trade-investment;
   }
 
-  &.wales-office {
+  &.wo {
     background-color: $wales-office;
   }
 
