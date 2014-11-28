@@ -6,6 +6,7 @@ var source = require('vinyl-source-stream');
 var mocha = require('gulp-mocha');
 var jscs = require('gulp-jscs');
 var jshint = require('gulp-jshint');
+var karma = require('gulp-karma');
 
 var config = {
   sassPath: './src/sass',
@@ -40,8 +41,11 @@ gulp.task('browserify', function () {
 });
 
 gulp.task('test', function () {
-  return gulp.src(config.testPath + '/*.js', {read: false})
-    .pipe(mocha());
+  return gulp.src(config.testPath + '/*.spec.js', {read: false})
+    .pipe(karma({
+      configFile: 'test/karma.conf.js',
+      action: 'run'
+    }));
 });
 
 gulp.task('connect', function () {
