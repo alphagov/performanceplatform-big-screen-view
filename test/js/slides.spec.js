@@ -8,9 +8,7 @@ describe('slides', function () {
   beforeEach(function (done) {
     var deferred = Q.defer();
 
-    Dashboard.prototype.getConfig = function () {
-      return deferred.promise;
-    };
+    sinon.stub(Dashboard.prototype, 'getConfig').returns(deferred.promise);
 
     slides(container).then(function () {
       done();
