@@ -13,8 +13,17 @@ module.exports = function (slideContainer) {
       });
 
       var html = '';
-      var introSlideTemplate = _.template('<h1>Performance data for <%= title %></h1><p class="data-url">Data from www.gov.uk/performance</p>'),
-        slideTemplate = _.template('<h2><%= dashboardTitle %></h2><p class="content"><span class="big-number"><%= data %></span> <span class="title"><%= title.toLowerCase() %></span><p class="data-url">www.gov.uk/performance/<%= dashboardSlug %></p>');
+      var introSlideTemplate = _.template(
+          '<h1>Performance data for <%= title %></h1>' +
+          '<p class="data-url">Data from www.gov.uk/performance</p>'
+        ),
+        slideTemplate = _.template(
+          '<h2><%= dashboardTitle %></h2>' +
+          '<p class="content">' +
+          '<span class="big-number"><%= data %></span> ' +
+          '<span class="title"><%= title.toLowerCase() %></span>' +
+          '<p class="data-url">www.gov.uk/performance/<%= dashboardSlug %></p>'
+        );
 
       var introSlide = document.createElement('div');
       introSlide.classList.add('slide');
