@@ -1,9 +1,8 @@
 var gulp = require('gulp');
-var connect = require('gulp-connect')
+var connect = require('gulp-connect');
 var sass = require('gulp-sass');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
-var mocha = require('gulp-mocha');
 var jscs = require('gulp-jscs');
 var jshint = require('gulp-jshint');
 var karma = require('gulp-karma');
@@ -40,7 +39,7 @@ gulp.task('browserify', function () {
     .pipe(gulp.dest('./js/'));
 });
 
-gulp.task('test', function () {
+gulp.task('karma', function () {
   return gulp.src(config.testPath + '/*.spec.js', {read: false})
     .pipe(karma({
       configFile: 'test/karma.conf.js',
@@ -60,7 +59,9 @@ gulp.task('watch', function () {
   gulp.watch(config.jsPath + '/**/*.js', ['browserify']);
 });
 
+
 gulp.task('lint', ['jscs', 'jshint']);
+gulp.task('test', ['lint', 'karma']);
 gulp.task('production', ['sass', 'browserify']);
 gulp.task('default', ['sass', 'browserify', 'lint']);
 gulp.task('server', ['production', 'connect', 'watch']);
