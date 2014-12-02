@@ -1,8 +1,8 @@
 var _ = require('underscore'),
   Dashboard = require('performanceplatform-client.js');
 
-module.exports = function (slideContainer) {
-  var dashboard = new Dashboard('carers-allowance');
+module.exports = function (dashboardSlug, slideContainer) {
+  var dashboard = new Dashboard(dashboardSlug);
 
   return dashboard.getConfig().
     then(function (dashboardConfig) {
