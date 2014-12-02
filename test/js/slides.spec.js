@@ -10,7 +10,7 @@ describe('slides', function () {
 
     sinon.stub(Dashboard.prototype, 'getConfig').returns(deferred.promise);
 
-    slides(container).then(function () {
+    slides('example-slug', container).then(function () {
       done();
     });
     deferred.resolve({
