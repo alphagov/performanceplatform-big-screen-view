@@ -2,9 +2,9 @@ var _ = require('underscore'),
   Dashboard = require('performanceplatform-client.js');
 
 module.exports = function (slideContainer) {
-  var dashboard = new Dashboard();
+  var dashboard = new Dashboard('carers-allowance');
 
-  return dashboard.getConfig('carers-allowance').
+  return dashboard.getConfig().
     then(function (dashboardConfig) {
 
       // add dummy KPI until supplied from API
