@@ -6,6 +6,7 @@ var source = require('vinyl-source-stream');
 var jscs = require('gulp-jscs');
 var jshint = require('gulp-jshint');
 var karma = require('gulp-karma');
+var brfs = require('brfs');
 
 var config = {
   sassPath: './src/sass',
@@ -33,8 +34,14 @@ gulp.task('sass', function () {
 });
 
 gulp.task('browserify', function () {
-  return browserify(config.jsPath + '/app.js')
-    .bundle()
+  var b = browserify();
+  b.transform(brfs);
+  b.add(config.jsPath + '/app.js');
+  return b.bundle()
+    .on('error', function (err) {
+      console.log(err.message);
+      this.end();
+    })
     .pipe(source('app.js'))
     .pipe(gulp.dest('./js/'));
 });
@@ -65,8 +72,8 @@ gulp.task('connect', function () {
 gulp.task('watch', function () {
   gulp.watch(config.sassPath + '/**/*.scss', ['sass']);
   gulp.watch(config.jsPath + '/**/*.js', ['browserify']);
+  gulp.watch(config.jsPath + '/**/*.mus', ['browserify']);
 });
-
 
 gulp.task('lint', ['jscs', 'jshint']);
 gulp.task('test', ['lint', 'karma']);

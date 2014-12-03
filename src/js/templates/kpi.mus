@@ -1,0 +1,9 @@
+<div class="slide {{ departmentCode }}">
+<h2>{{ dashboardTitle }}</h2>
+<p class="slide__content">
+  <h3>{{ title }}</h3>
+  <span class="t-kpi-recent slide__big-number">{{ data.0.formatted_value }}</span>
+    <p class="slide__year-ending">for year ending {{ data.0.formatted_end_at }}</p>
+      <p class="t-change slide__change slide__change--{{ data.0.formatted_change_from_previous.direction }}">{{ data.0.formatted_change_from_previous.change }} from the year ending {{ data.0.formatted_start_at }}</p>
+    <p class="slide__data-url">www.gov.uk/performance/{{ dashboardSlug }}</p>
+</div>

@@ -1,0 +1,58 @@
+@import '../../node_modules/govuk_frontend_toolkit/stylesheets/_css3';
+@import '../../node_modules/govuk_frontend_toolkit/stylesheets/_conditionals';
+@import '_slide_colours';
+
+.slide {
+  background-color: $govuk-blue;
+  color: $white;
+  font-size: 4vw;
+  cursor: none;
+  margin: 0;
+  padding: 4%;
+  height: 100%;
+  position: absolute;
+  top: -100%;
+  z-index: 0;
+  width: 100%;
+
+  // This null translate transform is included to instruct Chrome to use
+  // hardware acceleration for this element, which noticeably improves
+  // performance when repainting.
+  -webkit-transform: translateZ(0);
+  @include transition(top, 0.75s, ease-out);
+
+  @include media(tablet) {
+    padding-left: 20%;
+  }
+
+  &.on-screen {
+    top: 0;
+    z-index: 2;
+  }
+
+  &.previously-on-screen {
+    top: 100%;
+    z-index: 1;
+  }
+
+}
+
+.slide__data-from {
+  font-size: 2.5vw;
+}
+
+.slide__content {
+  margin-top: 2vw;
+}
+
+.slide__big-number {
+  font-size: 22vw;
+  display: block;
+}
+
+.slide__data-url {
+  font-size: 1.8vw;
+  font-weight: normal;
+  margin-top: 2vw;
+}
+
