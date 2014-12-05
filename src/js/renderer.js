@@ -6,7 +6,7 @@ module.exports = {
   renderSlide: function (data) {
     var slideType = data['module-type'] || 'introduction';
     data = this.transformData(data);
-    return Mustache.render(this.getTemplate(slideType), data);
+    return data.displaySlide === false ? '' : Mustache.render(this.getTemplate(slideType), data);
   },
 
   getTemplate: function (slideType) {
@@ -35,7 +35,9 @@ module.exports = {
 
     mostRecent = data.data[0];
     if (mostRecent.formatted_value !== 'no data') {
-      data.showChange = true;
+      data.latestAvailable = true;
+    } else if (data.data[1].formatted_value === 'no data') {
+      data.displaySlide = false;
     }
     return data;
   }

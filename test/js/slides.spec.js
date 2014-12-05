@@ -116,6 +116,23 @@ describe('slides', function () {
 
     });
 
+    describe('2 most recent KPI figures are unavailable', function () {
+
+      beforeEach(function (done) {
+        this.slidesPromise.then(function () {
+          done();
+        });
+        this.dashboardConfig.modules[0].data[0].formatted_value = 'no data';
+        this.dashboardConfig.modules[0].data[1].formatted_value = 'no data';
+        this.deferred.resolve(this.dashboardConfig);
+      });
+
+      it('doesn\'t show the slide', function () {
+        expect($(this.container).find('.t-slide-kpi').length).to.equal(0);
+      });
+
+    });
+
   });
 
 });
