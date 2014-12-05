@@ -1,4 +1,4 @@
 <div class="slide intro-slide on-screen">
-<h1 class="t-slide-title slide__intro-title">Performance data for {{ title }}</h1>
-<p class="slide__data-url">Data from www.gov.uk/performance</p>
+<h1 class="t-slide-title intro-title">Performance data for {{ title }}</h1>
+<p class="data-url">Data from www.gov.uk/performance</p>
 </div>

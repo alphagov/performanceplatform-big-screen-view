@@ -1,7 +1,7 @@
 <div class="slide {{ classList }}">
 <h2>{{ dashboardTitle }}</h2>
-<p class="slide__content">
+<p class="content">
   <h3>{{ title }}</h3>
-  <span class="slide__big-number">{{ data.0.formatted_value }}</span>
-    <p class="slide__data-url">www.gov.uk/performance/{{ dashboardSlug }}</p>
+  <span class="big-number">{{ data.0.formatted_value }}</span>
+    <p class="data-url">www.gov.uk/performance/{{ dashboardSlug }}</p>
 </div>
