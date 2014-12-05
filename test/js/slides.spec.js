@@ -4,10 +4,15 @@ describe('slides', function () {
   var Q = require('q');
   var slides = require('../../src/js/slides.js');
 
+
+  /* ============= SETUP FOR ALL TESTS ============== */
+
   beforeEach(function () {
     this.deferred = Q.defer();
     this.container = document.createElement('div');
-    this.stub = sinon.stub(Dashboard.prototype, 'getDashboardMetrics').returns(this.deferred.promise);
+    this.stub = sinon
+      .stub(Dashboard.prototype, 'getDashboardMetrics')
+      .returns(this.deferred.promise);
     this.slidesPromise = slides('example-slug', this.container);
     this.dashboardConfig = {
       title: '"Dashboard title 2"',
@@ -18,15 +23,26 @@ describe('slides', function () {
       modules: [{
         title: 'Transactions per year',
         'module-type': 'kpi',
-        data: [{
-          formatted_value: '3,520',
-          formatted_start_at: 'Oct 2012',
-          formatted_end_at: 'Jan 2013',
-          formatted_change_from_previous: {
-            change: '+5%',
-            direction: 'increase'
+        data: [
+          {
+            formatted_value: '3,520',
+            formatted_start_at: 'Oct 2012',
+            formatted_end_at: 'Jan 2013',
+            formatted_change_from_previous: {
+              change: '+5%',
+              direction: 'increase'
+            }
+          },
+          {
+            formatted_value: '1,366',
+            formatted_start_at: 'Apr 2012',
+            formatted_end_at: 'Sep 2012',
+            formatted_change_from_previous: {
+              change: '-2%',
+              direction: 'decrease'
+            }
           }
-        }]
+        ]
       }]
     };
   });
@@ -35,7 +51,9 @@ describe('slides', function () {
     this.stub.restore();
   });
 
+
   describe('Introduction slide', function () {
+
     beforeEach(function (done) {
       /* only allow execution to go through to the test once the promise has been resolved */
       this.slidesPromise.then(function () {
@@ -45,18 +63,26 @@ describe('slides', function () {
     });
 
     it('should render the title', function () {
-      $(this.container).find('.t-slide-title').should.have.text('Performance data for "Dashboard title 2"');
+      $(this.container).find('.t-slide-title')
+        .should.have.text('Performance data for "Dashboard title 2"');
     });
+
   });
+
 
   describe('KPI slide', function () {
 
     describe('Full data', function () {
+
       beforeEach(function (done) {
         this.slidesPromise.then(function () {
           done();
         });
         this.deferred.resolve(this.dashboardConfig);
+      });
+
+      it('shows the slide title', function () {
+        $(this.container).find('.t-module-title').should.have.text('Transactions per year');
       });
 
       it('shows the most recent KPI figure, if available', function () {
@@ -66,9 +92,11 @@ describe('slides', function () {
       it('shows change in KPI', function () {
         $(this.container).find('.t-change').should.have.text('+5% from the year ending Oct 2012');
       });
+
     });
 
     describe('Most recent KPI figure unavailable', function () {
+
       beforeEach(function (done) {
         this.slidesPromise.then(function () {
           done();
@@ -81,8 +109,12 @@ describe('slides', function () {
         $(this.container).find('.t-kpi-recent').should.have.text('no data');
       });
 
-    });
+      it('shows data value for the second-most-recent period instead of change %', function () {
+        $(this.container).find('.t-second-most-recent')
+          .should.have.text('1,366 for year ending Sep 2012');
+      });
 
+    });
 
   });
 
