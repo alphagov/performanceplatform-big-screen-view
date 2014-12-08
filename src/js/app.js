@@ -1,14 +1,17 @@
-var dashboardSlug = window.location.pathname.split('/').pop();
+var container = document.getElementById('fs');
 
-var fullscreen = require('./fullscreen')(document.getElementById('fs'));
+var dashboardSlug = window.location.pathname.split('/').pop();
 var slides = require('./slides');
-slides(dashboardSlug, document.getElementById('fs')).then(function () {
+slides(dashboardSlug, container).then(function () {
   var carousel = require('./carousel');
   document.querySelector('.slide').classList.add('on-screen');
   window.setInterval(carousel, (5 * 1000));
 });
-var analytics = require('./analytics');
 
+var fullscreen = require('./fullscreen')(container);
 document.getElementById('full-screen-toggle').onclick = fullscreen;
 
+var analytics = require('./analytics');
 analytics.setup();
+
+require('./cursor')(container);

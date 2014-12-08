@@ -26,6 +26,9 @@ body {
   height: 100%;
   top: 0;
   overflow: hidden;
+  &.is-inactive {
+    cursor: none;
+  }
 }
 
 #full-screen-link {
