@@ -8,13 +8,11 @@ module.exports = {
     var slideType;
 
     data.displaySlide = true;
-    slideType = data['module-type'] || 'introduction';
+    slideType = data['module-type'];
 
-    if (slideType !== 'introduction') {
-      data.displaySlide = this.displaySlide(data);
-      if (data.displaySlide) {
-        data = this.checkForMissingData(data);
-      }
+    data.displaySlide = this.displaySlide(data);
+    if (data.displaySlide) {
+      data = this.checkForMissingData(data);
     }
 
     return data.displaySlide ? Mustache.render(this.getTemplate(slideType), data) : '';
@@ -24,9 +22,6 @@ module.exports = {
     /* Must call readFileSync with string literals not variables as first param so that BRFS can
      inline the template during build - https://github.com/substack/brfs/issues/36 */
     switch (slideType) {
-      case 'introduction': {
-        return fs.readFileSync(__dirname + '/templates/introduction.mus', 'utf8');
-      }
       case 'kpi': {
         return fs.readFileSync(__dirname + '/templates/kpi.mus', 'utf8');
       }

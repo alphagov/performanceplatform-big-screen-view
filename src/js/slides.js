@@ -10,8 +10,6 @@ module.exports = function (dashboardSlug, slideContainer) {
     then(function (dashboardConfig) {
       var html = '';
 
-      html += renderer.renderSlide(dashboardConfig);
-
       _.each(dashboardConfig.modules, function (module) {
         html += renderer.renderSlide(_.extend(module, {
           departmentCode: dashboardConfig.department.abbr.toLowerCase(),

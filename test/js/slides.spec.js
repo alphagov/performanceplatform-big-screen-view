@@ -57,24 +57,6 @@ describe('slides', function () {
     this.stub.restore();
   });
 
-  describe('Introduction slide', function () {
-
-    beforeEach(function (done) {
-      /* only allow execution to go through to the test once the promise has been resolved */
-      this.slidesPromise.then(function () {
-        done();
-      });
-      this.deferred.resolve(this.dashboardConfig);
-    });
-
-    it('should render the title', function () {
-      $(this.container).find('.t-slide-title')
-        .should.have.text('Performance data for "Dashboard title 2"');
-    });
-
-  });
-
-
   describe('KPI slide', function () {
 
     describe('No data', function () {
