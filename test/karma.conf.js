@@ -3,21 +3,23 @@
 module.exports = function (karma) {
   karma.set({
 
+    basePath: '../',
+
     frameworks: ['browserify', 'mocha', 'sinon', 'chai-jquery', 'chai', 'jquery-2.1.0'],
 
     files: [
-      'js/*.spec.js'
+      'test/js/*.spec.js'
     ],
 
     reporters: ['spec'],
 
     preprocessors: {
-      'js/*.spec.js': ['browserify']
+      'test/js/*.spec.js': ['browserify']
     },
 
     browsers: ['PhantomJS'],
 
-    logLevel: karma.LOG_ERROR,
+    logLevel: karma.LOG_INFO,
 
     singleRun: false,
     autoWatch: true,

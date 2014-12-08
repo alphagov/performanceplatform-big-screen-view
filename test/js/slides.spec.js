@@ -3,6 +3,9 @@ describe('slides', function () {
   var Dashboard = require('performanceplatform-client.js');
   var Q = require('q');
   var slides = require('../../src/js/slides.js');
+  var dashboardConfig = require(
+    '../../node_modules/performanceplatform-client.js/test/fixtures/dashboard-processed.json'
+  );
 
 
   /* ============= SETUP FOR ALL TESTS ============== */
@@ -14,42 +17,9 @@ describe('slides', function () {
       .stub(Dashboard.prototype, 'getDashboardMetrics')
       .returns(this.deferred.promise);
     this.slidesPromise = slides('example-slug', this.container);
-    this.dashboardConfig = {
-      title: '"Dashboard title 2"',
-      department: {
-        abbr: 'DFT',
-        title: 'Department for Transport'
-      },
-      modules: [{
-        title: 'Transactions per year',
-        'module-type': 'kpi',
-        data: [
-          {
-            formatted_value: '3,520',
-            formatted_start_at: 'Oct 2012',
-            formatted_end_at: 'Jan 2013',
-            formatted_change_from_previous: {
-              change: '+5%',
-              direction: 'increase'
-            }
-          },
-          {
-            formatted_value: '1,366',
-            formatted_start_at: 'Apr 2012',
-            formatted_end_at: 'Sep 2012',
-            formatted_change_from_previous: {
-              change: '-2%',
-              direction: 'decrease'
-            }
-          }
-        ]
-      }]
-    };
 
-    this.isSlidePresent = function () {
-      return !!$(this.container).find('.t-slide-kpi').length;
-    }
-
+    // make a fresh clone of the JSON object for each test
+    this.dashboardConfig = JSON.parse(JSON.stringify(dashboardConfig));
 
   });
 
@@ -70,7 +40,7 @@ describe('slides', function () {
       });
 
       it('doesn\'t show the slide', function () {
-        this.isSlidePresent().should.be.false;
+        expect($(this.container).find('.t-slide-kpi').length).to.equal(2);
       });
 
     });
@@ -85,15 +55,15 @@ describe('slides', function () {
       });
 
       it('shows the slide title', function () {
-        $(this.container).find('.t-module-title').should.have.text('Transactions per year');
+        $(this.container).find('.t-module-title').first().should.have.text('Transactions per year');
       });
 
       it('shows the most recent KPI figure, if available', function () {
-        $(this.container).find('.t-kpi-recent').should.have.text('3,520');
+        $(this.container).find('.t-main-figure').first().should.have.text('45.8m');
       });
 
       it('shows change in KPI', function () {
-        $(this.container).find('.t-change').should.have.text('+5% from the year ending Oct 2012');
+        $(this.container).find('.t-change').first().should.have.text('-0.27% from the year ending July 2013');
       });
 
     });
@@ -109,12 +79,12 @@ describe('slides', function () {
       });
 
       it('shows "no data" instead of the most recent KPI figure', function () {
-        $(this.container).find('.t-kpi-recent').should.have.text('no data');
+        $(this.container).find('.t-main-figure').first().should.have.text('no data');
       });
 
       it('shows data value for the second-most-recent period instead of change %', function () {
-        $(this.container).find('.t-second-most-recent')
-          .should.have.text('1,366 for year ending Sep 2012');
+        $(this.container).find('.t-second-most-recent').first()
+          .should.have.text('46m for year ending Mar 2014');
       });
 
     });
@@ -130,7 +100,7 @@ describe('slides', function () {
       });
 
       it('doesn\'t show data for second most recent period', function () {
-        expect($(this.container).find('.t-second-most-recent,.t-change').length).to.equal(0);
+        expect($(this.container).find('.t-slide-kpi').first().find('.t-second-most-recent,.t-change').length).to.equal(0);
       });
 
     });
@@ -147,7 +117,7 @@ describe('slides', function () {
       });
 
       it('doesn\'t show the slide', function () {
-        this.isSlidePresent().should.be.false;
+        expect($(this.container).find('.t-slide-kpi').length).to.equal(2);
       });
 
     });
