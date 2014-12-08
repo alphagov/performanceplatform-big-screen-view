@@ -1,6 +1,6 @@
 <div class="t-slide-kpi slide {{ departmentCode }}">
-  <h2 class="dashboard-title">{{ dashboardTitle }}</h2>
   <div class="content">
+    <h2 class="dashboard-title">{{ dashboardTitle }}</h2>
     <h3 class="t-module-title module-title">{{ title }}</h3>
     <span class="t-main-figure main-figure{{^latestAvailable}} main-figure-no-data{{/latestAvailable}}">{{ data.0.formatted_value }}</span>
     <p class="year-ending">for year ending {{ data.0.formatted_end_at }}</p>
