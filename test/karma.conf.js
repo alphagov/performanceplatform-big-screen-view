@@ -3,7 +3,7 @@
 module.exports = function (karma) {
   karma.set({
 
-    frameworks: ['browserify', 'mocha', 'sinon', 'chai'],
+    frameworks: ['browserify', 'mocha', 'sinon', 'chai-jquery', 'chai', 'jquery-2.1.0'],
 
     files: [
       'js/*.spec.js'
@@ -17,10 +17,10 @@ module.exports = function (karma) {
 
     browsers: ['PhantomJS'],
 
-    logLevel: karma.DEBUG_INFO,
+    logLevel: karma.LOG_ERROR,
 
-    singleRun: true,
-    autoWatch: false,
+    singleRun: false,
+    autoWatch: true,
 
     // browserify configuration
     browserify: {

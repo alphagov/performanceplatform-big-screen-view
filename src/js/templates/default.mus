@@ -1,0 +1,7 @@
+<div class="slide {{ classList }}">
+<h2>{{ dashboardTitle }}</h2>
+<p class="content">
+  <h3>{{ title }}</h3>
+  <span class="big-number">{{ data.0.formatted_value }}</span>
+    <p class="data-url">www.gov.uk/performance/{{ dashboardSlug }}</p>
+</div>

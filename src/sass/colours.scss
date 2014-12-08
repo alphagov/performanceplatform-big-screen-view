@@ -1,4 +1,10 @@
+@import '../../node_modules/govuk_frontend_toolkit/stylesheets/_colours';
+
+$positive-colour: #74B74A;
+$negative-colour: #BF1E2D;
+
 .slide {
+
 
   &.dwp {
     background-color: $department-for-work-pensions;

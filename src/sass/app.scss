@@ -1,9 +1,8 @@
 @import '../../node_modules/govuk_frontend_toolkit/stylesheets/_colours';
-@import '../../node_modules/govuk_frontend_toolkit/stylesheets/_css3';
 @import '../../node_modules/govuk_frontend_toolkit/stylesheets/_typography';
 @import 'fonts';
 @import 'reset';
-@import '_slide_colours';
+@import 'slide';
 
 html {
   @include box-sizing(border-box);
@@ -40,58 +39,3 @@ body {
   font-size: 1.5vw;
   color: $white;
 }
-
-.slide {
-  background-color: $govuk-blue;
-  color: $white;
-  font-size: 4vw;
-  cursor: none;
-  margin: 0;
-  padding: 4%;
-  height: 100%;
-  position: absolute;
-  top: -100%;
-  z-index: 0;
-  width: 100%;
-
-  // This null translate transform is included to instruct Chrome to use
-  // hardware acceleration for this element, which noticeably improves
-  // performance when repainting.
-  -webkit-transform: translateZ(0);
-  @include transition(top, 0.75s, ease-out);
-
-  @include media(tablet) {
-    padding-left: 20%;
-  }
-
-  &.on-screen {
-    top: 0;
-    z-index: 2;
-  }
-
-  &.previously-on-screen {
-    top: 100%;
-    z-index: 1;
-  }
-
-}
-
-.data-from {
-  font-size: 2.5vw;
-}
-
-.content {
-  margin-top: 2vw;
-}
-
-.big-number {
-  font-size: 22vw;
-  display: block;
-}
-
-.data-url {
-  font-size: 1.8vw;
-  font-weight: normal;
-  margin-top: 2vw;
-}
-
