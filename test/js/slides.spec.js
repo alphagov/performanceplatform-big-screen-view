@@ -45,12 +45,17 @@ describe('slides', function () {
         ]
       }]
     };
+
+    this.isSlidePresent = function () {
+      return !!$(this.container).find('.t-slide-kpi').length;
+    }
+
+
   });
 
   afterEach(function () {
     this.stub.restore();
   });
-
 
   describe('Introduction slide', function () {
 
@@ -71,6 +76,22 @@ describe('slides', function () {
 
 
   describe('KPI slide', function () {
+
+    describe('No data', function () {
+
+      beforeEach(function (done) {
+        this.slidesPromise.then(function () {
+          done();
+        });
+        this.dashboardConfig.modules[0].data = [];
+        this.deferred.resolve(this.dashboardConfig);
+      });
+
+      it('doesn\'t show the slide', function () {
+        this.isSlidePresent().should.be.false;
+      });
+
+    });
 
     describe('Full data', function () {
 
@@ -116,6 +137,22 @@ describe('slides', function () {
 
     });
 
+    describe('Second most recent KPI figure unavailable', function () {
+
+      beforeEach(function (done) {
+        this.slidesPromise.then(function () {
+          done();
+        });
+        this.dashboardConfig.modules[0].data[1].formatted_value = 'no data';
+        this.deferred.resolve(this.dashboardConfig);
+      });
+
+      it('doesn\'t show data for second most recent period', function () {
+        expect($(this.container).find('.t-second-most-recent,.t-change').length).to.equal(0);
+      });
+
+    });
+
     describe('2 most recent KPI figures are unavailable', function () {
 
       beforeEach(function (done) {
@@ -128,7 +165,7 @@ describe('slides', function () {
       });
 
       it('doesn\'t show the slide', function () {
-        expect($(this.container).find('.t-slide-kpi').length).to.equal(0);
+        this.isSlidePresent().should.be.false;
       });
 
     });
