@@ -10,6 +10,6 @@
     {{#showSecondLatest}}
       <p class="t-second-most-recent second-most-recent">{{ data.1.formatted_value }} for year ending {{ data.1.formatted_end_at }}</p>
     {{/showSecondLatest}}
-    <p class="data-url">www.gov.uk/performance/{{ dashboardSlug }}</p>
+    <p class="data-url"><a class="link-dashboard" href="http://www.gov.uk/performance/{{ dashboardSlug }}#{{ slug }}">www.gov.uk/performance/{{ dashboardSlug }}</a></p>
   </div>
 </div>
