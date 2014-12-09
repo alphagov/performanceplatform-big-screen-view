@@ -1,6 +1,7 @@
 var _ = require('underscore'),
   Dashboard = require('performanceplatform-client.js'),
-  renderer = require('./renderer');
+  renderer = require('./renderer'),
+  dataTransform = require('./data-transform');
 
 
 module.exports = function (dashboardSlug, slideContainer) {
@@ -11,13 +12,11 @@ module.exports = function (dashboardSlug, slideContainer) {
       var html = '';
 
       _.each(dashboardConfig.modules, function (module) {
-        html += renderer.renderSlide(_.extend(module, {
-          departmentCode: dashboardConfig.department.abbr.toLowerCase(),
-          dashboardSlug: dashboardConfig.slug,
-          dashboardTitle: dashboardConfig.title
-        }));
+        var data = dataTransform.prepareModuleForRender(dashboardConfig, module);
+        if (data.displaySlide) {
+          html += renderer.renderSlide(data);
+        }
       });
-
       slideContainer.innerHTML = html;
 
     }, function (err) {
