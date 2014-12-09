@@ -26,6 +26,9 @@ body {
   height: 100%;
   top: 0;
   overflow: hidden;
+  &.is-inactive {
+    cursor: none;
+  }
 }
 
 #full-screen-link {
@@ -36,6 +39,13 @@ body {
 }
 
 #full-screen-toggle {
+  -webkit-appearance: none;
+  border: 0 none;
+  background: transparent none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
   font-size: 1.5vw;
   color: $white;
+  text-decoration: underline;
 }

@@ -6,7 +6,6 @@
   background-color: $govuk-blue;
   color: $white;
   font-size: 2.5vw;
-  cursor: none;
   margin: 0;
   padding: 4%;
   height: 100%;
@@ -20,6 +19,14 @@
   // performance when repainting.
   -webkit-transform: translateZ(0);
   @include transition(top, 0.75s, ease-out);
+
+  &:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -0.25em; /* Adjusts for spacing */
+  }
 
   @include media(tablet) {
     padding-left: 20%;
@@ -45,15 +52,16 @@
   }
 
   .content {
-    margin-top: 2vw;
+    display: inline-block;
+    vertical-align: middle;
   }
 
-  .main-number {
+  .main-figure {
     font-size: 18vw;
     display: block;
   }
 
-  .main-number-no-data {
+  .main-figure-no-data {
     font-size: 14vw;
   }
 
@@ -90,6 +98,16 @@
     color: $grey-2;
     margin-right: 5px;
     margin-left: 2px;
+  }
+
+  .dashboard-title {
+    position: absolute;
+    top: 3%;
+  }
+
+  .link-dashboard {
+    color: $white;
+    text-decoration: none;
   }
 
 }
