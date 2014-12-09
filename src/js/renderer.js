@@ -25,8 +25,8 @@ module.exports = {
       case 'kpi': {
         return fs.readFileSync(__dirname + '/templates/kpi.mus', 'utf8');
       }
-      default : {
-        return fs.readFileSync(__dirname + '/templates/default.mus', 'utf8');
+      case 'single_timeseries': {
+        return fs.readFileSync(__dirname + '/templates/single_timeseries.mus', 'utf8');
       }
     }
   },
