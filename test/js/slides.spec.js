@@ -63,7 +63,8 @@ describe('slides', function () {
       });
 
       it('shows change in KPI', function () {
-        $(this.container).find('.t-change').first().should.have.text('-0.27% from the year ending July 2013');
+        $(this.container).find('.t-change').first()
+          .should.have.text('-0.27% from the year ending July 2013');
       });
 
     });
@@ -100,7 +101,8 @@ describe('slides', function () {
       });
 
       it('doesn\'t show data for second most recent period', function () {
-        expect($(this.container).find('.t-slide-kpi').first().find('.t-second-most-recent,.t-change').length).to.equal(0);
+        expect($(this.container).find('.t-slide-kpi').first()
+          .find('.t-second-most-recent,.t-change').length).to.equal(0);
       });
 
     });
