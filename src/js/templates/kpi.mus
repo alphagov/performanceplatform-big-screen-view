@@ -2,13 +2,13 @@
   <div class="content">
     <h2 class="dashboard-title">{{ dashboardTitle }}</h2>
     <h3 class="t-module-title module-title">{{ title }}</h3>
-    <span class="t-main-figure main-figure{{^latestAvailable}} main-figure-no-data{{/latestAvailable}}">{{ data.0.formatted_value }}</span>
-    <p class="year-ending">for year ending {{ data.0.formatted_end_at }}</p>
+    <span class="t-main-figure main-figure{{^latestAvailable}} main-figure-no-data{{/latestAvailable}}">{{ latest.formatted_value }}</span>
+    <p class="year-ending">for year ending {{ latest.formatted_end_at }}</p>
     {{#showChange}}
-      <p class="t-change change change-{{ data.0.formatted_change_from_previous.trend }}">{{ data.0.formatted_change_from_previous.change }} from the year ending {{ data.0.formatted_start_at }}</p>
+      <p class="t-change change change-{{ latest.formatted_change_from_previous.trend }}">{{ latest.formatted_change_from_previous.change }} from the year ending {{ latest.formatted_start_at }}</p>
     {{/showChange}}
     {{#showSecondLatest}}
-      <p class="t-second-most-recent second-most-recent">{{ data.1.formatted_value }} for year ending {{ data.1.formatted_end_at }}</p>
+      <p class="t-second-most-recent second-most-recent">{{ secondLatest.formatted_value }} for year ending {{ secondLatest.formatted_end_at }}</p>
     {{/showSecondLatest}}
     <p class="data-url"><a class="link-dashboard" href="http://www.gov.uk/performance/{{ dashboardSlug }}#{{ slug }}">www.gov.uk/performance/{{ dashboardSlug }}</a></p>
   </div>
