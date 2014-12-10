@@ -6,6 +6,9 @@ describe('slides', function () {
   var dashboardConfig = require(
     '../../node_modules/performanceplatform-client.js/test/fixtures/dashboard-processed.json'
   );
+  var moduleConfig = require(
+    '../../node_modules/performanceplatform-client.js/test/fixtures/module-processed.json'
+  );
 
 
   /* ============= SETUP FOR ALL TESTS ============== */
@@ -64,7 +67,7 @@ describe('slides', function () {
 
       it('shows change in KPI', function () {
         $(this.container).find('.t-change').first()
-          .should.have.text('-0.27% from the year ending July 2013');
+          .should.have.text('-0.27% from the year ending Mar 2014');
       });
 
     });
@@ -128,26 +131,104 @@ describe('slides', function () {
 
   describe('Single time series slide', function () {
 
-    describe('Full data', function () {
+    beforeEach(function (done) {
+      this.slidesPromise.then(function () {
+        done();
+      });
+      this.deferred.resolve(this.dashboardConfig);
+    });
+
+    it('shows the most recent figure, if available', function () {
+      $(this.container).find('.t-slide-single_timeseries .t-main-figure')
+        .should.have.text('37m 51s');
+    });
+
+    it('shows change since last period', function () {
+      $(this.container).find('.t-slide-single_timeseries .t-change')
+        .should.have.text('-5s on previous week');
+    });
+
+  });
+
+  describe('Realtime usage slide', function () {
+
+    beforeEach(function (done) {
+      this.clock = sinon.useFakeTimers();
+      this.slidesPromise.then(function () {
+        done();
+      });
+      this.moduleDeferred = Q.defer();
+      this.getModuleStub = sinon
+        .stub(Dashboard.prototype, 'getModule')
+        .returns(this.moduleDeferred.promise);
+      this.deferred.resolve(this.dashboardConfig);
+      this.moduleConfig = JSON.parse(JSON.stringify(moduleConfig));
+    });
+
+    afterEach(function () {
+      this.clock.restore();
+      this.getModuleStub.restore();
+    });
+
+    it('shows the most recent figure, if available', function () {
+      $(this.container).find('.t-slide-realtime .t-main-figure')
+        .should.have.text('1,492');
+    });
+
+    describe('Poll for an update successfully', function () {
 
       beforeEach(function (done) {
-        this.slidesPromise.then(function () {
+        this.moduleDeferred.promise.fin(function () {
           done();
         });
-        this.deferred.resolve(this.dashboardConfig);
+
+        this.clock.tick(2500);
+        this.moduleDeferred.resolve(this.moduleConfig);
       });
 
-      it('shows the most recent figure, if available', function () {
-        $(this.container).find('.t-slide-single_timeseries .t-main-figure')
-          .should.have.text('37m 51s');
+      it('updates the figure after 2 seconds', function () {
+        $(this.container).find('.t-slide-realtime .t-main-figure')
+          .should.have.text('1,563');
+      });
+    });
+
+    describe('Poll for updates even after a failed poll', function () {
+
+      beforeEach(function (done) {
+        this.moduleDeferred.promise.fin(function () {
+          done();
+        });
+
+        this.clock.tick(2500);
+        this.moduleDeferred.reject();
       });
 
-      it('shows change since last period', function () {
-        $(this.container).find('.t-slide-single_timeseries .t-change')
-          .should.have.text('-5s on previous week');
+      describe('Polls a second time', function () {
+
+        beforeEach(function (done) {
+          this.moduleDeferred.promise.fin(function () {
+            done();
+          });
+          // we have to re-stub getModule with a new promise as the last one was resolved
+          this.getModuleStub.restore();
+          this.moduleDeferred = Q.defer();
+          this.getModuleStub = sinon
+            .stub(Dashboard.prototype, 'getModule')
+            .returns(this.moduleDeferred.promise);
+          this.clock.tick(2500); // 5s have now elapsed, enough time for 2 polls to have happened
+          this.moduleConfig.data[0].formatted_value = '999';
+          this.moduleDeferred.resolve(this.moduleConfig);
+        });
+
+        it('updates the figure', function () {
+          $(this.container).find('.t-slide-realtime .t-main-figure')
+            .should.have.text('999');
+        });
+
       });
 
     });
+
   });
 
 });

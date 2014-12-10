@@ -1,14 +1,8 @@
-<div class="t-slide-single_timeseries slide {{ departmentCode }}">
-  <div class="content">
-    <h2 class="dashboard-title">{{ dashboardTitle }}</h2>
-    <h3 class="t-module-title module-title">{{ title }}</h3>
-    <span class="t-main-figure main-figure{{^latestAvailable}} main-figure-no-data{{/latestAvailable}}">{{ latest.formatted_value }}</span>
-    {{#showChange}}
-      <p class="t-change change change-{{ latest.formatted_change_from_previous.trend }}">{{ latest.formatted_change_from_previous.change }} on previous {{ latest.period }}</p>
-    {{/showChange}}
-    {{#showSecondLatest}}
-      <p class="t-second-most-recent second-most-recent">{{ secondLatest.formatted_value }} for previous {{ secondLatest.period }}</p>
-    {{/showSecondLatest}}
-    <p class="data-url"><a class="link-dashboard" href="http://www.gov.uk/performance/{{ dashboardSlug }}#{{ slug }}">www.gov.uk/performance/{{ dashboardSlug }}</a></p>
-  </div>
+<div>
+  {{#showChange}}
+    <p class="t-change change change-{{ latest.formatted_change_from_previous.trend }}">{{ latest.formatted_change_from_previous.change }} on previous {{ latest.period }}</p>
+  {{/showChange}}
+  {{#showSecondLatest}}
+    <p class="t-second-most-recent second-most-recent">{{ secondLatest.formatted_value }} for previous {{ secondLatest.period }}</p>
+  {{/showSecondLatest}}
 </div>
