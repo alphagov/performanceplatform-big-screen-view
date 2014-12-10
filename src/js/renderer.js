@@ -14,6 +14,9 @@ module.exports = {
       case 'kpi': {
         return fs.readFileSync(__dirname + '/templates/kpi.mus', 'utf8');
       }
+      case 'realtime': {
+        return fs.readFileSync(__dirname + '/templates/realtime.mus', 'utf8');
+      }
       case 'single_timeseries': {
         return fs.readFileSync(__dirname + '/templates/single_timeseries.mus', 'utf8');
       }
