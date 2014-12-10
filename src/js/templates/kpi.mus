@@ -1,4 +1,4 @@
-<div class="t-slide-kpi slide {{ departmentCode }}">
+<div class="t-slide-kpi slide {{ departmentCode }}" data-module-slug={{ slug }}>
   <div class="content">
     <h2 class="dashboard-title">{{ dashboardTitle }}</h2>
     <h3 class="t-module-title module-title">{{ title }}</h3>

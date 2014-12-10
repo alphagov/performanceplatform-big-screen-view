@@ -8,6 +8,7 @@ module.exports = {
       dashboardSlug: dashboardConfig.slug,
       dashboardTitle: dashboardConfig.title,
       moduleType: module['module-type'],
+      slug: module.slug,
       title: module.title,
       latest: module.data[0] || null,
       secondLatest: module.data[1] || null
