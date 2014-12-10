@@ -13,7 +13,7 @@ RealtimeUpdate.prototype.fetchModuleUpdate = function (module) {
     this.dashboard.getModule(module)
       .then(_.bind(function (moduleUpdate) {
         var el = this.slideContainer.querySelector('[data-module-slug="' + module.slug + '"] ' +
-          '[data-realtime="latest.formatted_value"]');
+          ' .js-main-figure');
         el.innerHTML = moduleUpdate.data[0].formatted_value;
       }, this))
       .fin(_.bind(function () { // make the next poll even if the last one failed
