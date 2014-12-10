@@ -24,10 +24,13 @@ module.exports = {
   displaySlide: function (data) {
     var returnVal = true;
 
-    if ((!data.latest && !data.secondLatest) ||
-      ((data.latest.formatted_value === NO_DATA) &&
-      (data.secondLatest.formatted_value === NO_DATA))) {
-      returnVal = false;
+    // we're going to display realtime slides even if prior data was missing, as data might reappear
+    if (data.moduleType !== 'realtime') {
+      if (((data.latest === null) && (data.secondLatest === null)) ||
+        ((data.latest.formatted_value === NO_DATA) &&
+        (data.secondLatest.formatted_value === NO_DATA))) {
+        returnVal = false;
+      }
     }
     return returnVal;
   },
