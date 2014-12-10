@@ -67,7 +67,7 @@ describe('slides', function () {
 
       it('shows change in KPI', function () {
         $(this.container).find('.t-change').first()
-          .should.have.text('-0.27% from the year ending July 2013');
+          .should.have.text('-0.27% from the year ending Mar 2014');
       });
 
     });

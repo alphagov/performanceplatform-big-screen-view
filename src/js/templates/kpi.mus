@@ -1,7 +1,7 @@
 <div>
     <p class="year-ending">for year ending {{ latest.formatted_end_at }}</p>
     {{#showChange}}
-      <p class="t-change change change-{{ latest.formatted_change_from_previous.trend }}">{{ latest.formatted_change_from_previous.change }} from the year ending {{ latest.formatted_start_at }}</p>
+      <p class="t-change change change-{{ latest.formatted_change_from_previous.trend }}">{{ latest.formatted_change_from_previous.change }} from the year ending {{ secondLatest.formatted_end_at }}</p>
     {{/showChange}}
     {{#showSecondLatest}}
       <p class="t-second-most-recent second-most-recent">{{ secondLatest.formatted_value }} for year ending {{ secondLatest.formatted_end_at }}</p>
