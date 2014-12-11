@@ -11,12 +11,12 @@ module.exports = {
       slug: module.slug,
       title: module.title,
       latest: module.data[0] || null,
-      secondLatest: module.data[1] || null
+      previous: module.data[1] || null
     };
 
     data.displaySlide = this.displaySlide(data);
     if (data.displaySlide) {
-      data = this.checkForMissingData(data);
+      data = this.missingDataFlags(data);
     }
     return data;
   },
@@ -26,24 +26,24 @@ module.exports = {
 
     // we're going to display realtime slides even if prior data was missing, as data might reappear
     if (data.moduleType !== 'realtime') {
-      if (((data.latest === null) && (data.secondLatest === null)) ||
+      if (((data.latest === null) && (data.previous === null)) ||
         ((data.latest.formatted_value === NO_DATA) &&
-        (data.secondLatest.formatted_value === NO_DATA))) {
+        (data.previous.formatted_value === NO_DATA))) {
         returnVal = false;
       }
     }
     return returnVal;
   },
 
-  checkForMissingData: function (data) {
+  missingDataFlags: function (data) {
     if (data.latest.formatted_value !== NO_DATA) {
       data.latestAvailable = true;
     }
-    if (data.secondLatest && (data.secondLatest.formatted_value !== NO_DATA)) {
-      data.secondLatestAvailable = true;
+    if (data.previous && (data.previous.formatted_value !== NO_DATA)) {
+      data.previousAvailable = true;
     }
-    data.showChange = data.latestAvailable && data.secondLatestAvailable;
-    data.showSecondLatest = !data.latestAvailable && data.secondLatestAvailable;
+    data.showChange = data.latestAvailable && data.previousAvailable;
+    data.showPrevious = !data.latestAvailable && data.previousAvailable;
 
     return data;
   }
