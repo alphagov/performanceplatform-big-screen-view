@@ -1,31 +1,19 @@
 describe('analytics', function () {
-
-  var analytics,
-      window;
-
+  
   beforeEach(function () {
-    window = {
-      ga: function () {
-      },
-      location: {
-        pathname: 'mypath/'
-      }
-    };
+    var analytics;
+    this.clock = sinon.useFakeTimers();
+    window.ga = function () { };
+    this.spy = sinon.spy(window, 'ga');
     analytics = require('../../src/js/analytics');
-    analytics.startTime = 0;
-    analytics.getCurrentTime = function () {
-      return 1000 * 60 * 10;
-    }
+    analytics.setup();
+    this.clock.tick(analytics.interval + 500);
   });
 
-
-  it('should send the elapsed time with the event', function () {
-    var spy;
-
-    spy = sinon.spy(window, 'ga');
-
-    analytics.fireEvent(window);
-    spy.calledOnce.should.equal(true);
-    spy.args[0][1].eventValue.should.equal(10);
+  it('should send the elapsed time and action with the GA event', function () {
+    var event = this.spy.args[0][1];
+    this.spy.calledOnce.should.equal(true);
+    event.eventValue.should.equal(10);
+    event.eventAction = 'minutes-since-page-load';
   });
 });

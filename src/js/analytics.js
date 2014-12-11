@@ -1,10 +1,10 @@
 _ = require('underscore');
 
 module.exports = {
+  interval: 10 * 60 * 1000,
   startTime: new Date().getTime(),
   setup: function () {
-    var interval = 10 * 60 * 1000;
-    window.setInterval(_.bind(this.fireEvent, this), interval);
+    setInterval(_.bind(this.fireEvent, this), this.interval);
   },
   getCurrentTime: function () {
     return new Date().getTime();
