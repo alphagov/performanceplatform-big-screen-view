@@ -17,6 +17,7 @@ module.exports = {
     data.displaySlide = this.displaySlide(data);
     if (data.displaySlide) {
       data = this.missingDataFlags(data);
+      data = this.dataConversions(data);
     }
     return data;
   },
@@ -45,6 +46,14 @@ module.exports = {
     data.showChange = data.latestAvailable && data.previousAvailable;
     data.showPrevious = !data.latestAvailable && data.previousAvailable;
 
+    return data;
+  },
+
+  dataConversions: function (data) {
+    if (data.latest.formatted_change_from_previous &&
+      data.latest.formatted_change_from_previous.change === '0%') {
+      data.latest.formatted_change_from_previous.change = 'No change';
+    }
     return data;
   }
 
