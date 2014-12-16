@@ -1,4 +1,4 @@
-_ = require('underscore');
+var _ = require('underscore');
 
 module.exports = {
   interval: 10 * 60 * 1000,
@@ -15,9 +15,9 @@ module.exports = {
 
     currentTime = this.getCurrentTime();
     elapsedMinutes = Math.round(((currentTime - this.startTime) / 1000) / 60);
-    ga('send', {
+    window.ga('send', {
       'hitType': 'event',
-      'eventCategory': location.pathname,
+      'eventCategory': window.location.pathname,
       'eventAction': 'minutes-since-page-load',
       'eventLabel': '',
       'eventValue': elapsedMinutes,
