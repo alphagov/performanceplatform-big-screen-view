@@ -43,7 +43,8 @@ module.exports = {
     if (data.previous && (data.previous.formatted_value !== NO_DATA)) {
       data.previousAvailable = true;
     }
-    data.showChange = data.latestAvailable && data.previousAvailable;
+    data.showChange = data.latestAvailable && data.previousAvailable &&
+      data.latest.formatted_change_from_previous;
     data.showPrevious = !data.latestAvailable && data.previousAvailable;
 
     return data;

@@ -1,11 +1,9 @@
 var container = document.getElementById('fs');
 
 var dashboardSlug = window.location.pathname.split('/').pop();
-var slides = require('./slides');
-slides(dashboardSlug, container).then(function () {
-  var carousel = require('./carousel');
-  document.querySelector('.slide').classList.add('on-screen');
-  window.setInterval(carousel, (5 * 1000));
+
+require('./slides')(dashboardSlug, container).then(function () {
+  require('./carousel').setup(document);
 });
 
 var fullscreen = require('./fullscreen')(container);
