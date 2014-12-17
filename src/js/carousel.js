@@ -7,8 +7,9 @@ module.exports = {
   setup: function (container) {
     this.container = container;
     this.container.querySelector('.slide').classList.add('on-screen');
-
-    window.setInterval(_.bind(this.animate, this), this.interval);
+    if (this.container.querySelectorAll('.slide').length > 1) {
+      window.setInterval(_.bind(this.animate, this), this.interval);
+    }
   },
 
   animate: function () {
