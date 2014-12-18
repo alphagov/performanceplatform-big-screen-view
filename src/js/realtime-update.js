@@ -21,7 +21,7 @@ RealtimeUpdate.prototype.fetchModuleUpdate = function (module) {
         this.fetchModuleUpdate(module);
       }, this));
 
-  }, this), 2000);
+  }, this), 120000);
 
 };
 

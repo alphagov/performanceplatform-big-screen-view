@@ -182,11 +182,11 @@ describe('slides', function () {
           done();
         });
 
-        this.clock.tick(2500);
+        this.clock.tick(150000);
         this.moduleDeferred.resolve(this.moduleConfig);
       });
 
-      it('updates the figure after 2 seconds', function () {
+      it('updates the figure after 2 minutes', function () {
         $(this.container).find('.t-slide-realtime .t-main-figure')
           .should.have.text('1,563');
       });
@@ -199,7 +199,7 @@ describe('slides', function () {
           done();
         });
 
-        this.clock.tick(2500);
+        this.clock.tick(150000);
         this.moduleDeferred.reject();
       });
 
@@ -215,7 +215,7 @@ describe('slides', function () {
           this.getModuleStub = sinon
             .stub(Dashboard.prototype, 'getModule')
             .returns(this.moduleDeferred.promise);
-          this.clock.tick(2500); // 5s have now elapsed, enough time for 2 polls to have happened
+          this.clock.tick(150000); // 5 mins have now elapsed, enough time for 2 polls to have happened
           this.moduleConfig.data[0].formatted_value = '999';
           this.moduleDeferred.resolve(this.moduleConfig);
         });
