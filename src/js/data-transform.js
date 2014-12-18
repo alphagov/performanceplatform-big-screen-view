@@ -51,6 +51,7 @@ module.exports = {
   },
 
   dataConversions: function (data) {
+    //TODO - move to client / API
     if (data.latest.formatted_change_from_previous &&
       data.latest.formatted_change_from_previous.change === '0%') {
       data.latest.formatted_change_from_previous.change = 'No change';

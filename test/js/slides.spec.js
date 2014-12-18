@@ -150,6 +150,27 @@ describe('slides', function () {
 
   });
 
+  describe('User satisfaction slide', function () {
+
+    beforeEach(function (done) {
+      this.slidesPromise.then(function () {
+        done();
+      });
+      this.deferred.resolve(this.dashboardConfig);
+    });
+
+    it('shows the most recent figure, if available', function () {
+      $(this.container).find('.t-slide-user_satisfaction_graph .t-main-figure')
+        .should.have.text('85.6%');
+    });
+
+    it('shows change since last period', function () {
+      $(this.container).find('.t-slide-user_satisfaction_graph .t-change')
+        .should.have.text('-1.4% on previous week');
+    });
+
+  });
+
   describe('Realtime usage slide', function () {
 
     beforeEach(function (done) {
