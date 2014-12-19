@@ -3,7 +3,4 @@
     {{#showChange}}
       <p class="t-change change change-{{ latest.formatted_change_from_previous.trend }}">{{ latest.formatted_change_from_previous.change }} from the {{ latest.period }} ending {{ previous.formatted_end_at }}</p>
     {{/showChange}}
-    {{#showPrevious}}
-      <p class="t-second-most-recent second-most-recent">{{ previous.formatted_value }} for the {{ latest.period }} ending {{ previous.formatted_end_at }}</p>
-    {{/showPrevious}}
   </div>
