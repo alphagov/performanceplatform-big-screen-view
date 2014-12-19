@@ -88,7 +88,7 @@ describe('slides', function () {
 
       it('shows data value for the second-most-recent period instead of change %', function () {
         $(this.container).find('.t-second-most-recent').first()
-          .should.have.text('46m for year ending Mar 2014');
+          .should.have.text('46m for the year ending Mar 2014');
       });
 
     });
