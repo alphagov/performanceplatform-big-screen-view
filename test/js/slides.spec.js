@@ -82,13 +82,12 @@ describe('slides', function () {
         this.deferred.resolve(this.dashboardConfig);
       });
 
-      it('shows "no data" instead of the most recent KPI figure', function () {
-        $(this.container).find('.t-main-figure').first().should.have.text('no data');
+      it('promotes previous period value to main figure', function () {
+        $(this.container).find('.t-main-figure').first().should.have.text('46m');
       });
 
-      it('shows data value for the second-most-recent period instead of change %', function () {
-        $(this.container).find('.t-second-most-recent').first()
-          .should.have.text('46m for the year ending Mar 2014');
+      it('doesnt show data value for the second-most-recent period or change %', function () {
+        expect($(this.container).find('.t-second-most-recent').length).to.equal(0);
       });
 
     });

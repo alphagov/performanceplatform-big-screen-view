@@ -37,6 +37,8 @@ module.exports = {
   },
 
   missingDataFlags: function (data) {
+    var period;
+
     if (data.latest.formatted_value !== NO_DATA) {
       data.latestAvailable = true;
     }
@@ -45,7 +47,14 @@ module.exports = {
     }
     data.showChange = data.latestAvailable && data.previousAvailable &&
       data.latest.formatted_change_from_previous;
-    data.showPrevious = !data.latestAvailable && data.previousAvailable;
+
+    if (!data.latestAvailable && data.previousAvailable) {
+      period = data.latest.period;
+      data.latest = data.previous;
+      data.latest.period = period;
+      data.latestAvailable = true;
+      delete data.previous;
+    }
 
     return data;
   },
