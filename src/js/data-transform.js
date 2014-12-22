@@ -3,8 +3,13 @@ var NO_DATA = 'no data';
 module.exports = {
 
   prepareModuleForRender: function (dashboardConfig, module) {
-    var data = {
-      departmentCode: dashboardConfig.department.abbr.toLowerCase(),
+    var data,
+      deptCode;
+
+    deptCode = (dashboardConfig.department && dashboardConfig.department.abbr &&
+    dashboardConfig.department.abbr.toLowerCase()) || '';
+    data = {
+      departmentCode: deptCode,
       dashboardSlug: dashboardConfig.slug,
       dashboardTitle: dashboardConfig.title,
       moduleType: module['module-type'],
