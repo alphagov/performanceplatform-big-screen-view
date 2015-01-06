@@ -13,6 +13,14 @@ module.exports = {
     return data.displaySlide ? Mustache.render(this.getTemplate(), data) : '';
   },
 
+  renderErrorSlide: function (dashboard, str) {
+    return Mustache.render(this.getTemplate(), {
+      dashboardTitle: dashboard.title,
+      dashboardSlug: dashboard.slug,
+      contents: '<p class="error-message">' + str + '</p>'
+    });
+  },
+
   getTemplate: function () {
     return fs.readFileSync(__dirname + '/templates/layout.mus', 'utf8');
   },
