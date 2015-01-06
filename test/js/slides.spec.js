@@ -324,7 +324,7 @@ describe('slides', function () {
         });
       });
 
-      it('error should be there', function () {
+      it('error should not be there', function () {
 
         $(this.container).find('.error-message')
           .should.not.exist;
@@ -332,6 +332,28 @@ describe('slides', function () {
 
     });
 
+    describe('If it errors it displays a message', function () {
+
+      beforeEach(function (done) {
+        this.slidesPromise.then(function () {
+          done();
+        }, function() {
+          done();
+        });
+        this.deferred.reject();
+      });
+
+      it('error should be there', function () {
+
+        $(this.container).find('.error-message')
+          .should.exist;
+      });
+
+      it('should be on screen', function () {
+        $(this.container).should.have.class('on-screen');
+      });
+
+    });
   });
 
 });
