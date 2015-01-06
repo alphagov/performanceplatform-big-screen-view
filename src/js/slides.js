@@ -10,18 +10,34 @@ module.exports = function (dashboardSlug, slideContainer) {
   return dashboard.getDashboardMetrics().
     then(function (dashboardConfig) {
       var html = '',
-        realTimeUpdates = [];
+        realTimeUpdates = [],
+        preparedSlides,
+        slidesToRender;
 
-      _.each(dashboardConfig.modules, function (module) {
-        var data = dataTransform.prepareModuleForRender(dashboardConfig, module);
-        if (data.displaySlide) {
-          html += renderer.renderSlide(data);
-          if (data.moduleType === 'realtime') {
-            realTimeUpdates.push(new RealtimeUpdate(dashboard, dashboardConfig, module,
+      preparedSlides = _.map(dashboardConfig.modules, function (module) {
+        return {
+          module: module,
+          data: dataTransform.prepareModuleForRender(dashboardConfig, module)
+        };
+      });
+
+      slidesToRender = _.filter(preparedSlides, function (slide) {
+        return slide.data.displaySlide;
+      });
+
+      if (slidesToRender.length > 0) {
+        _.each(slidesToRender, function (slide) {
+          html += renderer.renderSlide(slide.data);
+          if (slide.data.moduleType === 'realtime') {
+            realTimeUpdates.push(new RealtimeUpdate(dashboard, dashboardConfig, slide.module,
               slideContainer));
           }
-        }
-      });
+        });
+      } else {
+        html = renderer.renderErrorSlide(dashboardConfig,
+          'Dashboard not currently available in big screen view');
+      }
+
       slideContainer.innerHTML = html;
 
     }, function (err) {

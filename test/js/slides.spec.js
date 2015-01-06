@@ -251,5 +251,88 @@ describe('slides', function () {
 
   });
 
+  describe('Dashboard not available slide', function () {
+
+    describe('If not modules then display message', function () {
+
+      beforeEach(function (done) {
+        this.slidesPromise.then(function () {
+          done();
+        });
+        this.deferred.resolve({
+          title: 'FooService',
+          slug: 'foo-service',
+          modules: []
+        });
+      });
+
+      it('error should be there', function () {
+
+        $(this.container).find('.error-message')
+          .should.exist;
+      });
+
+    });
+
+    describe('If no valid modules then display message', function () {
+
+      beforeEach(function (done) {
+        this.slidesPromise.then(function () {
+          done();
+        });
+        this.deferred.resolve({
+          title: 'FooService',
+          slug: 'foo-service',
+          modules: [{
+            slug: 'foo-module',
+            title: 'FooModule',
+            'module-type': 'single_timeseries',
+            data: [
+              { formatted_value: 'no data' },
+              { formatted_value: 'no data' }
+            ]
+          }]
+        });
+      });
+
+      it('error should be there', function () {
+
+        $(this.container).find('.error-message')
+          .should.exist;
+      });
+
+    });
+
+    describe('If valid modules then don\'t display message', function () {
+
+      beforeEach(function (done) {
+        this.slidesPromise.then(function () {
+          done();
+        });
+        this.deferred.resolve({
+          title: 'FooService',
+          slug: 'foo-service',
+          modules: [{
+            slug: 'foo-module',
+            title: 'FooModule',
+            'module-type': 'single_timeseries',
+            data: [
+              { formatted_value: 'foo' },
+              { formatted_value: 'bar' }
+            ]
+          }]
+        });
+      });
+
+      it('error should be there', function () {
+
+        $(this.container).find('.error-message')
+          .should.not.exist;
+      });
+
+    });
+
+  });
+
 });
 
