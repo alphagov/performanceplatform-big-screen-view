@@ -41,6 +41,12 @@ module.exports = function (dashboardSlug, slideContainer) {
       slideContainer.innerHTML = html;
 
     }, function (err) {
+      slideContainer.classList.add('on-screen');
+      slideContainer.innerHTML = renderer.renderErrorSlide(
+        { title: dashboardSlug,
+          slug: dashboardSlug },
+        'Dashboard not currently available in big screen view');
+
       throw(err);
     });
 
