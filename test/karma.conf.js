@@ -24,6 +24,8 @@ module.exports = function (karma) {
     singleRun: false,
     autoWatch: true,
 
+    browserNoActivityTimeout: 20000,
+
     // browserify configuration
     browserify: {
       debug: true,
