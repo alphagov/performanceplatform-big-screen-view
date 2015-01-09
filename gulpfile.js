@@ -5,7 +5,6 @@ var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var jscs = require('gulp-jscs');
 var jshint = require('gulp-jshint');
-var karma = require('gulp-karma');
 var brfs = require('brfs');
 
 var config = {
@@ -60,7 +59,7 @@ gulp.task('watch', function () {
 });
 
 gulp.task('lint', ['jscs', 'jshint']);
-gulp.task('test', ['lint', 'karma']);
+gulp.task('test', ['lint']);
 gulp.task('production', ['sass', 'browserify']);
 gulp.task('default', ['sass', 'browserify', 'lint']);
 gulp.task('server', ['production', 'connect', 'watch']);
