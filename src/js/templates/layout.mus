@@ -2,7 +2,7 @@
   <div class="content">
     <h2 class="dashboard-title">{{ dashboardTitle }}</h2>
     <h3 class="t-module-title module-title">{{ title }}</h3>
-    <span class="t-main-figure js-main-figure main-figure{{^latestAvailable}} main-figure-no-data{{/latestAvailable}}">{{ latest.formatted_value }}</span>
+    <span class="t-main-figure js-main-figure main-figure{{^latestAvailable}} main-figure-no-data{{/latestAvailable}}{{#longValue}} main-figure-long-value{{/longValue}}">{{ latest.formatted_value }}</span>
     {{{contents}}}
     <p class="data-url"><a class="link-dashboard" href="http://www.gov.uk/performance/{{ dashboardSlug }}#{{ slug }}">www.gov.uk/performance/{{ dashboardSlug }}</a></p>
   </div>

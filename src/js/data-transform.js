@@ -24,6 +24,9 @@ module.exports = {
       data = this.missingDataFlags(data);
       data = this.dataConversions(data);
     }
+    if (data.latest.formatted_value.length > 5) {
+      data.longValue = true;
+    }
     return data;
   },
 

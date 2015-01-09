@@ -5,7 +5,6 @@
 .slide {
   background-color: $govuk-blue;
   color: $white;
-  font-size: 2.5vw;
   margin: 0;
   padding: 8%;
   height: 100%;
@@ -44,11 +43,11 @@
 
   .module-title,
   .intro-title {
-    font-size: 5vw;
+    font-size: 8vmin;
   }
 
   .data-from {
-    font-size: 2.5vw;
+    font-size: 4.5vmin;
   }
 
   .content {
@@ -57,20 +56,19 @@
   }
 
   .main-figure {
-    font-size: 18vw;
+    font-size: 30vmin;
     display: block;
-  }
-
-  .main-figure-no-data {
-    font-size: 14vw;
+    &.main-figure-long-value {
+      font-size: 24vmin;
+    }
   }
 
   .year-ending {
-    margin-bottom: 1vw;
+    margin-bottom: 1.7vmin;
   }
 
   .data-url {
-    font-size: 1.8vw;
+    font-size: 3.3vmin;
     font-weight: normal;
     position: absolute;
     bottom: 6%;
@@ -111,7 +109,7 @@
   }
 
   .error-message {
-    font-size: 5vw;
+    font-size: 7.7vmin;
     line-height: 1.2;
   }
 
