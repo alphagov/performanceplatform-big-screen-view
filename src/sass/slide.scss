@@ -2,10 +2,15 @@
 @import '../../node_modules/govuk_frontend_toolkit/stylesheets/_conditionals';
 @import 'colours';
 
+@mixin v-font-size($size) {
+  font-size: ($size * 5) + px;    /* old */
+  font-size: $size + vm;   /* IE9 */
+  font-size: $size + vmin;
+}
+
 .slide {
   background-color: $govuk-blue;
   color: $white;
-  font-size: 2.5vw;
   margin: 0;
   padding: 8%;
   height: 100%;
@@ -29,7 +34,7 @@
   }
 
   @include media(tablet) {
-    padding-left: 20%;
+    padding-left: 15%;
   }
 
   &.on-screen {
@@ -44,11 +49,11 @@
 
   .module-title,
   .intro-title {
-    font-size: 5vw;
+    @include v-font-size(6);
   }
 
   .data-from {
-    font-size: 2.5vw;
+    @include v-font-size(4.5);
   }
 
   .content {
@@ -57,20 +62,19 @@
   }
 
   .main-figure {
-    font-size: 18vw;
+    @include v-font-size(26);
     display: block;
-  }
-
-  .main-figure-no-data {
-    font-size: 14vw;
+    &.main-figure-long-value {
+      @include v-font-size(21);
+    }
   }
 
   .year-ending {
-    margin-bottom: 1vw;
+    @include v-font-size(3.3);
   }
 
   .data-url {
-    font-size: 1.8vw;
+    @include v-font-size(3.3);
     font-weight: normal;
     position: absolute;
     bottom: 6%;
@@ -111,7 +115,7 @@
   }
 
   .error-message {
-    font-size: 5vw;
+    @include v-font-size(7.7);
     line-height: 1.2;
   }
 

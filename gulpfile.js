@@ -46,22 +46,6 @@ gulp.task('browserify', function () {
     .pipe(gulp.dest('./js/'));
 });
 
-gulp.task('karma', function () {
-  return gulp.src(config.testPath + '/*.spec.js', {read: false})
-    .pipe(karma({
-      configFile: 'test/karma.conf.js',
-      action: 'run'
-    }));
-});
-
-gulp.task('karma-watch', function () {
-  return gulp.src(config.testPath + '/*.spec.js', {read: false})
-    .pipe(karma({
-      configFile: 'test/karma.conf.js',
-      action: 'watch'
-    }));
-});
-
 gulp.task('connect', function () {
   connect.server({
     'fallback': 'index.html',
