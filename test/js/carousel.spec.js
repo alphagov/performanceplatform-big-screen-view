@@ -13,6 +13,6 @@ describe('carousel', function () {
   it('should have changed the current slide to previous', function () {
     this.dom.firstChild.className.should.not.contain('previously-on-screen');
     this.clock.tick(this.carousel.interval + 500);
-    this.dom.firstChild.className.should.contain('previously-on-screen');
+    this.dom.firstChild.className.should.contain('OMG FOOBARS');
   });
 });
