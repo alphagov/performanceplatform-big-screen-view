@@ -1,14 +1,30 @@
 describe('slides', function () {
 
-  var Dashboard = require('performanceplatform-client.js');
+  var Dashboard = require('performanceplatform-client.js').Dashboard;
   var Q = require('q');
   var slides = require('../../src/js/slides.js');
   var dashboardConfig = require(
-    '../../node_modules/performanceplatform-client.js/test/fixtures/dashboard-processed.json'
+    '../../node_modules/performanceplatform-client.js/test/fixtures/dashboard-response.json'
   );
-  var moduleConfig = require(
-    '../../node_modules/performanceplatform-client.js/test/fixtures/module-processed.json'
+
+  var singleTimeseriesConfig = require(
+    '../../node_modules/performanceplatform-client.js/test/fixtures/module-config-single-time-series.json'
   );
+  var kpiConfig = require(
+    '../../node_modules/performanceplatform-client.js/test/fixtures/module-config-kpi.json'
+  );
+  var userSatisfactionConfig = require(
+    '../../node_modules/performanceplatform-client.js/test/fixtures/module-config-user-satisfaction-graph.json'
+  );
+  var realtimeConfig = require(
+    '../../node_modules/performanceplatform-client.js/test/fixtures/module-config-realtime.json'
+  );
+
+  dashboardConfig.modules = [];
+  dashboardConfig.modules[0] = kpiConfig;
+  dashboardConfig.modules[1] = singleTimeseriesConfig;
+  dashboardConfig.modules[2] = userSatisfactionConfig;
+  dashboardConfig.modules[3] = realtimeConfig;
 
 
   /* ============= SETUP FOR ALL TESTS ============== */
@@ -16,9 +32,7 @@ describe('slides', function () {
   beforeEach(function () {
     this.deferred = Q.defer();
     this.container = document.createElement('div');
-    this.stub = sinon
-      .stub(Dashboard.prototype, 'getDashboardMetrics')
-      .returns(this.deferred.promise);
+    this.stub = sinon.stub(Dashboard.prototype, 'resolve').returns(this.deferred.promise);
     this.slidesPromise = slides('example-slug', this.container);
 
     // make a fresh clone of the JSON object for each test
@@ -38,12 +52,12 @@ describe('slides', function () {
         this.slidesPromise.then(function () {
           done();
         });
-        this.dashboardConfig.modules[0].data = [];
+        this.dashboardConfig.modules[0].dataSource.data = [];
         this.deferred.resolve(this.dashboardConfig);
       });
 
       it('doesn\'t show the slide', function () {
-        expect($(this.container).find('.t-slide-kpi').length).to.equal(2);
+        expect($(this.container).find('.t-slide-kpi').length).to.equal(0);
       });
 
     });
@@ -67,7 +81,7 @@ describe('slides', function () {
 
       it('shows change in KPI', function () {
         $(this.container).find('.t-change').first()
-          .should.have.text('-0.27% from the year ending Mar 2014');
+          .should.have.text('−0.27% from the year ending 31 March 2014');
       });
 
     });
@@ -78,7 +92,7 @@ describe('slides', function () {
         this.slidesPromise.then(function () {
           done();
         });
-        this.dashboardConfig.modules[0].data[0].formatted_value = 'no data';
+        this.dashboardConfig.modules[0].dataSource.data[0].number_of_transactions = null;
         this.deferred.resolve(this.dashboardConfig);
       });
 
@@ -98,7 +112,7 @@ describe('slides', function () {
         this.slidesPromise.then(function () {
           done();
         });
-        this.dashboardConfig.modules[0].data[1].formatted_value = 'no data';
+        this.dashboardConfig.modules[0].dataSource.data[1].number_of_transactions = null;
         this.deferred.resolve(this.dashboardConfig);
       });
 
@@ -115,13 +129,13 @@ describe('slides', function () {
         this.slidesPromise.then(function () {
           done();
         });
-        this.dashboardConfig.modules[0].data[0].formatted_value = 'no data';
-        this.dashboardConfig.modules[0].data[1].formatted_value = 'no data';
+        this.dashboardConfig.modules[0].dataSource.data[0].number_of_transactions = null;
+        this.dashboardConfig.modules[0].dataSource.data[1].number_of_transactions = null;
         this.deferred.resolve(this.dashboardConfig);
       });
 
       it('doesn\'t show the slide', function () {
-        expect($(this.container).find('.t-slide-kpi').length).to.equal(2);
+        expect($(this.container).find('.t-slide-kpi').length).to.equal(0);
       });
 
     });
@@ -139,12 +153,12 @@ describe('slides', function () {
 
     it('shows the most recent figure, if available', function () {
       $(this.container).find('.t-slide-single_timeseries .t-main-figure')
-        .should.have.text('37m 51s');
+        .should.have.text('82.9%');
     });
 
     it('shows change since last period', function () {
       $(this.container).find('.t-slide-single_timeseries .t-change')
-        .should.have.text('-5s on previous week');
+        .should.have.text('+11.57% on previous month');
     });
 
   });
@@ -160,12 +174,12 @@ describe('slides', function () {
 
     it('shows the most recent figure, if available', function () {
       $(this.container).find('.t-slide-user_satisfaction_graph .t-main-figure')
-        .should.have.text('85.6%');
+        .should.have.text('85.8%');
     });
 
     it('shows change since last period', function () {
       $(this.container).find('.t-slide-user_satisfaction_graph .t-change')
-        .should.have.text('-1.4% on previous week');
+        .should.have.text('−0.46% on previous 7 days');
     });
 
   });
@@ -182,7 +196,7 @@ describe('slides', function () {
         .stub(Dashboard.prototype, 'getModule')
         .returns(this.moduleDeferred.promise);
       this.deferred.resolve(this.dashboardConfig);
-      this.moduleConfig = JSON.parse(JSON.stringify(moduleConfig));
+      this.moduleConfig = JSON.parse(JSON.stringify(realtimeConfig));
     });
 
     afterEach(function () {
@@ -192,7 +206,7 @@ describe('slides', function () {
 
     it('shows the most recent figure, if available', function () {
       $(this.container).find('.t-slide-realtime .t-main-figure')
-        .should.have.text('1,492');
+        .should.have.text('482');
     });
 
     describe('Poll for an update successfully', function () {
@@ -203,12 +217,13 @@ describe('slides', function () {
         });
 
         this.clock.tick(150000);
+        this.moduleConfig.dataSource.data[0].unique_visitors = 599;
         this.moduleDeferred.resolve(this.moduleConfig);
       });
 
       it('updates the figure after 2 minutes', function () {
         $(this.container).find('.t-slide-realtime .t-main-figure')
-          .should.have.text('1,563');
+          .should.have.text('599');
       });
     });
 
@@ -236,7 +251,7 @@ describe('slides', function () {
             .stub(Dashboard.prototype, 'getModule')
             .returns(this.moduleDeferred.promise);
           this.clock.tick(150000); // 5 mins have now elapsed, enough time for 2 polls to have happened
-          this.moduleConfig.data[0].formatted_value = '999';
+          this.moduleConfig.dataSource.data[0].unique_visitors = 999;
           this.moduleDeferred.resolve(this.moduleConfig);
         });
 
@@ -259,6 +274,7 @@ describe('slides', function () {
         this.slidesPromise.then(function () {
           done();
         });
+
         this.deferred.resolve({
           title: 'FooService',
           slug: 'foo-service',
@@ -280,19 +296,8 @@ describe('slides', function () {
         this.slidesPromise.then(function () {
           done();
         });
-        this.deferred.resolve({
-          title: 'FooService',
-          slug: 'foo-service',
-          modules: [{
-            slug: 'foo-module',
-            title: 'FooModule',
-            'module-type': 'single_timeseries',
-            data: [
-              { formatted_value: 'no data' },
-              { formatted_value: 'no data' }
-            ]
-          }]
-        });
+        this.dashboardConfig.modules = [];
+        this.deferred.resolve(this.dashboardConfig);
       });
 
       it('error should be there', function () {
@@ -309,19 +314,7 @@ describe('slides', function () {
         this.slidesPromise.then(function () {
           done();
         });
-        this.deferred.resolve({
-          title: 'FooService',
-          slug: 'foo-service',
-          modules: [{
-            slug: 'foo-module',
-            title: 'FooModule',
-            'module-type': 'single_timeseries',
-            data: [
-              { formatted_value: 'foo' },
-              { formatted_value: 'bar' }
-            ]
-          }]
-        });
+        this.deferred.resolve(this.dashboardConfig);
       });
 
       it('error should not be there', function () {
@@ -337,7 +330,7 @@ describe('slides', function () {
       beforeEach(function (done) {
         this.slidesPromise.then(function () {
           done();
-        }, function() {
+        }, function () {
           done();
         });
         this.deferred.reject();

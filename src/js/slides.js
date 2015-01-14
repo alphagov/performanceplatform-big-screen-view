@@ -1,5 +1,5 @@
 var _ = require('underscore'),
-  Dashboard = require('performanceplatform-client.js'),
+  Dashboard = require('performanceplatform-client.js').Dashboard,
   renderer = require('./renderer'),
   dataTransform = require('./data-transform'),
   RealtimeUpdate = require('./realtime-update');
@@ -7,7 +7,7 @@ var _ = require('underscore'),
 module.exports = function (dashboardSlug, slideContainer) {
   var dashboard = new Dashboard(dashboardSlug);
 
-  return dashboard.getDashboardMetrics().
+  return dashboard.resolve().
     then(function (dashboardConfig) {
       var html = '',
         realTimeUpdates = [],
@@ -15,10 +15,12 @@ module.exports = function (dashboardSlug, slideContainer) {
         slidesToRender;
 
       preparedSlides = _.map(dashboardConfig.modules, function (module) {
-        return {
-          module: module,
-          data: dataTransform.prepareModuleForRender(dashboardConfig, module)
-        };
+        if (module) {
+          return {
+            module: module,
+            data: dataTransform.prepareModuleForRender(dashboardConfig, module)
+          };
+        }
       });
 
       slidesToRender = _.filter(preparedSlides, function (slide) {
