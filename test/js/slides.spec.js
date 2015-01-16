@@ -57,7 +57,7 @@ describe('slides', function () {
       });
 
       it('doesn\'t show the slide', function () {
-        expect($(this.container).find('.t-slide-kpi').length).to.equal(0);
+        $(this.container).find('.t-slide-kpi').length.should.equal(0);
       });
 
     });
@@ -101,7 +101,7 @@ describe('slides', function () {
       });
 
       it('doesnt show data value for the second-most-recent period or change %', function () {
-        expect($(this.container).find('.t-second-most-recent').length).to.equal(0);
+        $(this.container).find('.t-second-most-recent').length.should.equal(0);
       });
 
     });
@@ -117,8 +117,8 @@ describe('slides', function () {
       });
 
       it('doesn\'t show data for second most recent period', function () {
-        expect($(this.container).find('.t-slide-kpi').first()
-          .find('.t-second-most-recent,.t-change').length).to.equal(0);
+        $(this.container).find('.t-slide-kpi').first()
+          .find('.t-second-most-recent,.t-change').length.should.equal(0);
       });
 
     });
@@ -135,7 +135,7 @@ describe('slides', function () {
       });
 
       it('doesn\'t show the slide', function () {
-        expect($(this.container).find('.t-slide-kpi').length).to.equal(0);
+        $(this.container).find('.t-slide-kpi').length.should.equal(0);
       });
 
     });
