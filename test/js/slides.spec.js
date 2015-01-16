@@ -19,6 +19,9 @@ describe('slides', function () {
   var realtimeConfig = require(
     '../../node_modules/performanceplatform-client.js/test/fixtures/module-config-realtime.json'
   );
+  var groupedTimeseriesConfig = require(
+    '../../node_modules/performanceplatform-client.js/test/fixtures/module-config-grouped-time-series.json'
+  );
 
   dashboardConfig.modules = [];
   dashboardConfig.modules[0] = kpiConfig;
@@ -57,7 +60,7 @@ describe('slides', function () {
       });
 
       it('doesn\'t show the slide', function () {
-        expect($(this.container).find('.t-slide-kpi').length).to.equal(0);
+        $(this.container).find('.t-slide-kpi').length.should.equal(0);
       });
 
     });
@@ -101,7 +104,7 @@ describe('slides', function () {
       });
 
       it('doesnt show data value for the second-most-recent period or change %', function () {
-        expect($(this.container).find('.t-second-most-recent').length).to.equal(0);
+        $(this.container).find('.t-second-most-recent').length.should.equal(0);
       });
 
     });
@@ -117,8 +120,8 @@ describe('slides', function () {
       });
 
       it('doesn\'t show data for second most recent period', function () {
-        expect($(this.container).find('.t-slide-kpi').first()
-          .find('.t-second-most-recent,.t-change').length).to.equal(0);
+        $(this.container).find('.t-slide-kpi').first()
+          .find('.t-second-most-recent,.t-change').length.should.equal(0);
       });
 
     });
@@ -135,7 +138,7 @@ describe('slides', function () {
       });
 
       it('doesn\'t show the slide', function () {
-        expect($(this.container).find('.t-slide-kpi').length).to.equal(0);
+        $(this.container).find('.t-slide-kpi').length.should.equal(0);
       });
 
     });
@@ -180,6 +183,28 @@ describe('slides', function () {
     it('shows change since last period', function () {
       $(this.container).find('.t-slide-user_satisfaction_graph .t-change')
         .should.have.text('−0.46% on previous 7 days');
+        $(this.container).find('.t-slide-user_satisfaction_graph .t-change').length.should.equal(1);
+    });
+
+  });
+
+  describe('Grouped timeseries', function () {
+
+    beforeEach(function (done) {
+      this.slidesPromise.then(function () {
+        done();
+      });
+
+      this.dashboardConfig.modules = [];
+      this.dashboardConfig.modules[0] = groupedTimeseriesConfig;
+      this.deferred.resolve(this.dashboardConfig);
+    });
+
+    it('does not render a slide', function () {
+      $(this.container).find('.slide').length
+        .should.equal(1);
+      $(this.container).find('.error-message')
+          .should.exist;
     });
 
   });

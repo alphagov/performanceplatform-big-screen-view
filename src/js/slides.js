@@ -1,5 +1,6 @@
-var _ = require('underscore'),
+var _ = require('lodash'),
   Dashboard = require('performanceplatform-client.js').Dashboard,
+  Module = require('performanceplatform-client.js').Module,
   renderer = require('./renderer'),
   dataTransform = require('./data-transform'),
   RealtimeUpdate = require('./realtime-update');
@@ -12,7 +13,12 @@ module.exports = function (dashboardSlug, slideContainer) {
       var html = '',
         realTimeUpdates = [],
         preparedSlides,
-        slidesToRender;
+        slidesToRender,
+        supported = _.without(Module.prototype.supported, 'grouped_timeseries');
+
+      _.remove(dashboardConfig.modules, function (module) {
+        return _.contains(supported, module.moduleConfig['module-type']) === false;
+      });
 
       preparedSlides = _.map(dashboardConfig.modules, function (module) {
         if (module) {
