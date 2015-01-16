@@ -1,4 +1,4 @@
-var _ = require('underscore'),
+var _ = require('lodash'),
   Dashboard = require('performanceplatform-client.js').Dashboard,
   renderer = require('./renderer'),
   dataTransform = require('./data-transform'),

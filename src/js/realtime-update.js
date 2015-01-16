@@ -1,4 +1,4 @@
-var _ = require('underscore');
+var _ = require('lodash');
 var Delta = require('performanceplatform-client.js').Delta;
 
 var RealtimeUpdate = function (dashboard, dashboardConfig, module, slideContainer) {
