@@ -18,7 +18,8 @@ module.exports = {
       slug: module.moduleConfig.slug,
       title: module.moduleConfig.title,
       latest: moduleDataAsDelta.data[0] || null,
-      previous: moduleDataAsDelta.data[1] || null
+      previous: moduleDataAsDelta.data[1] || null,
+      sectionTitle: module.moduleConfig.sectionTitle || ''
     };
 
     data.displaySlide = this.displaySlide(data);
