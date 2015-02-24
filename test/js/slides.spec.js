@@ -2,11 +2,16 @@ describe('slides', function () {
 
   var Dashboard = require('performanceplatform-client.js').Dashboard;
   var Q = require('q');
+  var _ = require('lodash');
+
   var slides = require('../../src/js/slides.js');
   var dashboardConfig = require(
     '../../node_modules/performanceplatform-client.js/test/fixtures/dashboard-response.json'
   );
 
+  var dashboardWithSectionConfig = require(
+    '../../node_modules/performanceplatform-client.js/test/fixtures/dashboard-response-section.json'
+  );
   var singleTimeseriesConfig = require(
     '../../node_modules/performanceplatform-client.js/test/fixtures/module-config-single-time-series.json'
   );
@@ -22,6 +27,11 @@ describe('slides', function () {
   var groupedTimeseriesConfig = require(
     '../../node_modules/performanceplatform-client.js/test/fixtures/module-config-grouped-time-series.json'
   );
+
+  var sectionConfig = require(
+    '../../node_modules/performanceplatform-client.js/test/fixtures/module-config-section.json'
+  );
+
 
   dashboardConfig.modules = [];
   dashboardConfig.modules[0] = kpiConfig;
@@ -39,12 +49,32 @@ describe('slides', function () {
     this.slidesPromise = slides('example-slug', this.container);
 
     // make a fresh clone of the JSON object for each test
-    this.dashboardConfig = JSON.parse(JSON.stringify(dashboardConfig));
+    this.dashboardConfig = _.cloneDeep(dashboardConfig);
 
   });
 
   afterEach(function () {
     this.stub.restore();
+  });
+
+  describe('Sections', function () {
+
+    beforeEach(function (done) {
+      this.slidesPromise.then(function () {
+        done();
+      });
+      this.dashboardConfig = _.cloneDeep(dashboardWithSectionConfig);
+      this.dashboardConfig.modules = [];
+      this.dashboardConfig.modules.push(sectionConfig);
+      this.deferred.resolve(this.dashboardConfig);
+    });
+
+    it('Should add the section title to each module in a section', function () {
+      $(this.container).find('.section-title').length.should.equal(2);
+      $(this.container).find('.section-title').first().text()
+        .should.equal('Public digital service');
+    });
+
   });
 
   describe('KPI slide', function () {

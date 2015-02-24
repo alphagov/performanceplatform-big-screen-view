@@ -8,6 +8,21 @@ var _ = require('lodash'),
 module.exports = function (dashboardSlug, slideContainer) {
   var dashboard = new Dashboard(dashboardSlug);
 
+  function flattenSections(modules) {
+    var flattenedModules = [];
+    _.each(modules, function (module) {
+      if (module.moduleConfig['module-type'] === 'section') {
+        _.each(module.modules, function (nestedModule) {
+          nestedModule.moduleConfig.sectionTitle = module.moduleConfig.title;
+          flattenedModules.push(nestedModule);
+        });
+      } else {
+        flattenedModules.push(module);
+      }
+    });
+    return flattenedModules;
+  }
+
   return dashboard.resolve().
     then(function (dashboardConfig) {
       var html = '',
@@ -16,6 +31,7 @@ module.exports = function (dashboardSlug, slideContainer) {
         slidesToRender,
         supported = _.without(Module.prototype.supported, 'grouped_timeseries');
 
+      dashboardConfig.modules = flattenSections(dashboardConfig.modules);
       _.remove(dashboardConfig.modules, function (module) {
         return _.contains(supported, module.moduleConfig['module-type']) === false;
       });

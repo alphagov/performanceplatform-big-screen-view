@@ -47,6 +47,11 @@
     z-index: 1;
   }
 
+  .section-title {
+    font-weight: normal;
+    margin-bottom: 0.5em;
+  }
+
   .module-title,
   .intro-title {
     @include v-font-size(6);

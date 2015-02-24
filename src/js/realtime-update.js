@@ -14,7 +14,8 @@ RealtimeUpdate.prototype.fetchModuleUpdate = function (module) {
     this.dashboard.getModule(module)
       .then(_.bind(function (moduleUpdate) {
         var deltaView = new Delta(moduleUpdate);
-        var el = this.slideContainer.querySelector('[data-module-slug="' + module.moduleConfig.slug + '"] ' +
+        var el = this.slideContainer.querySelector('[data-module-slug="' +
+        module.moduleConfig.slug + '"] ' +
           ' .js-main-figure');
         el.innerHTML = deltaView.data[0].formatted_value;
       }, this))

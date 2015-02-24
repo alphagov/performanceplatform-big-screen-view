@@ -22,7 +22,6 @@ describe('carousel', function () {
     sinon.stub(this.carousel, 'getQueryString').returns('?interval=10');
     this.dom = $('<div><div class="slide"></div><div class="slide"></div>' +
     '<div class="slide"></div></div>')[0];
-    debugger;
     this.carousel.setup(this.dom);
     this.dom.firstChild.className.should.not.contain('previously-on-screen');
     this.clock.tick(9000);
