@@ -5,34 +5,16 @@ describe('slides', function () {
   var _ = require('lodash');
 
   var slides = require('../../src/js/slides.js');
-  var dashboardConfig = require(
-    '../../node_modules/performanceplatform-client.js/test/fixtures/dashboard-response.json'
-  );
 
-  var dashboardWithSectionConfig = require(
-    '../../node_modules/performanceplatform-client.js/test/fixtures/dashboard-response-section.json'
-  );
-  var singleTimeseriesConfig = require(
-    '../../node_modules/performanceplatform-client.js/test/fixtures/module-config-single-time-series.json'
-  );
-  var kpiConfig = require(
-    '../../node_modules/performanceplatform-client.js/test/fixtures/module-config-kpi.json'
-  );
-  var userSatisfactionConfig = require(
-    '../../node_modules/performanceplatform-client.js/test/fixtures/module-config-user-satisfaction-graph.json'
-  );
-  var realtimeConfig = require(
-    '../../node_modules/performanceplatform-client.js/test/fixtures/module-config-realtime.json'
-  );
-  var groupedTimeseriesConfig = require(
-    '../../node_modules/performanceplatform-client.js/test/fixtures/module-config-grouped-time-series.json'
-  );
-
-  var sectionConfig = require(
-    '../../node_modules/performanceplatform-client.js/test/fixtures/module-config-section.json'
-  );
-
-
+  var fixturePath = '../../node_modules/performanceplatform-client.js/test/fixtures/';
+  var dashboardConfig = require(fixturePath + 'dashboard-response.json');
+  var dashboardWithSectionConfig = require(fixturePath + 'dashboard-response-section.json');
+  var singleTimeseriesConfig = require(fixturePath + 'module-config-single-time-series.json');
+  var kpiConfig = require(fixturePath + 'module-config-kpi.json');
+  var userSatisfactionConfig = require(fixturePath + 'module-config-user-satisfaction-graph.json');
+  var realtimeConfig = require(fixturePath + 'module-config-realtime.json');
+  var groupedTimeseriesConfig = require(fixturePath + 'module-config-grouped-time-series.json');
+  var sectionConfig = require(fixturePath + 'module-config-section.json');
   dashboardConfig.modules = [];
   dashboardConfig.modules[0] = kpiConfig;
   dashboardConfig.modules[1] = singleTimeseriesConfig;
@@ -48,7 +30,7 @@ describe('slides', function () {
     this.stub = sinon.stub(Dashboard.prototype, 'resolve').returns(this.deferred.promise);
     this.slidesPromise = slides('example-slug', this.container);
 
-    // make a fresh clone of the JSON object for each test
+    // make a fresh copy of the JSON object for each test
     this.dashboardConfig = _.cloneDeep(dashboardConfig);
 
   });
@@ -213,7 +195,7 @@ describe('slides', function () {
     it('shows change since last period', function () {
       $(this.container).find('.t-slide-user_satisfaction_graph .t-change')
         .should.have.text('−0.46% on previous 7 days');
-        $(this.container).find('.t-slide-user_satisfaction_graph .t-change').length.should.equal(1);
+      $(this.container).find('.t-slide-user_satisfaction_graph .t-change').length.should.equal(1);
     });
 
   });
@@ -231,10 +213,8 @@ describe('slides', function () {
     });
 
     it('does not render a slide', function () {
-      $(this.container).find('.slide').length
-        .should.equal(1);
-      $(this.container).find('.error-message')
-          .should.exist;
+      $(this.container).find('.slide').length.should.equal(1);
+      $(this.container).find('.error-message').should.exist;
     });
 
   });
@@ -305,7 +285,8 @@ describe('slides', function () {
           this.getModuleStub = sinon
             .stub(Dashboard.prototype, 'getModule')
             .returns(this.moduleDeferred.promise);
-          this.clock.tick(150000); // 5 mins have now elapsed, enough time for 2 polls to have happened
+          // 5 mins have now elapsed, enough time for 2 polls to have happened
+          this.clock.tick(150000);
           this.moduleConfig.dataSource.data[0].unique_visitors = 999;
           this.moduleDeferred.resolve(this.moduleConfig);
         });
@@ -338,9 +319,7 @@ describe('slides', function () {
       });
 
       it('error should be there', function () {
-
-        $(this.container).find('.error-message')
-          .should.exist;
+        $(this.container).find('.error-message').should.exist;
       });
 
     });
@@ -356,9 +335,7 @@ describe('slides', function () {
       });
 
       it('error should be there', function () {
-
-        $(this.container).find('.error-message')
-          .should.exist;
+        $(this.container).find('.error-message').should.exist;
       });
 
     });
@@ -373,9 +350,7 @@ describe('slides', function () {
       });
 
       it('error should not be there', function () {
-
-        $(this.container).find('.error-message')
-          .should.not.exist;
+        $(this.container).find('.error-message').should.not.exist;
       });
 
     });
@@ -392,9 +367,7 @@ describe('slides', function () {
       });
 
       it('error should be there', function () {
-
-        $(this.container).find('.error-message')
-          .should.exist;
+        $(this.container).find('.error-message').should.exist;
       });
 
       it('should be on screen', function () {
