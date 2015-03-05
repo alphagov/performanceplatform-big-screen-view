@@ -91,22 +91,20 @@
   .change-decrease:before {
     display: inline-block;
     padding-right: 0.2em;
-    color: $grey-2;
+    color: $white;
   }
 
   .change-increase:before {
     content: "\25B2";
-    color: $positive-colour;
   }
 
   .change-decrease:before {
     content: "\25BC";
-    color: $negative-colour;
   }
 
   .change-no-change:before {
     content: "\25CF";
-    color: $grey-2;
+    color: $white;
     margin-right: 5px;
     margin-left: 2px;
   }
