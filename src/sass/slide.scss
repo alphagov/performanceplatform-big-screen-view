@@ -55,6 +55,7 @@
   .module-title,
   .intro-title {
     @include v-font-size(6);
+    margin-bottom: 0.5em;
   }
 
   .data-from {
