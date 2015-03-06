@@ -5,16 +5,34 @@ describe('slides', function () {
   var _ = require('lodash');
 
   var slides = require('../../src/js/slides.js');
+  var dashboardConfig = require(
+    '../../node_modules/performanceplatform-client.js/test/fixtures/dashboard-response.json'
+  );
 
-  var fixturePath = '../../node_modules/performanceplatform-client.js/test/fixtures/';
-  var dashboardConfig = require(fixturePath + 'dashboard-response.json');
-  var dashboardWithSectionConfig = require(fixturePath + 'dashboard-response-section.json');
-  var singleTimeseriesConfig = require(fixturePath + 'module-config-single-time-series.json');
-  var kpiConfig = require(fixturePath + 'module-config-kpi.json');
-  var userSatisfactionConfig = require(fixturePath + 'module-config-user-satisfaction-graph.json');
-  var realtimeConfig = require(fixturePath + 'module-config-realtime.json');
-  var groupedTimeseriesConfig = require(fixturePath + 'module-config-grouped-time-series.json');
-  var sectionConfig = require(fixturePath + 'module-config-section.json');
+  var dashboardWithSectionConfig = require(
+    '../../node_modules/performanceplatform-client.js/test/fixtures/dashboard-response-section.json'
+  );
+  var singleTimeseriesConfig = require(
+    '../../node_modules/performanceplatform-client.js/test/fixtures/module-config-single-time-series.json'
+  );
+  var kpiConfig = require(
+    '../../node_modules/performanceplatform-client.js/test/fixtures/module-config-kpi.json'
+  );
+  var userSatisfactionConfig = require(
+    '../../node_modules/performanceplatform-client.js/test/fixtures/module-config-user-satisfaction-graph.json'
+  );
+  var realtimeConfig = require(
+    '../../node_modules/performanceplatform-client.js/test/fixtures/module-config-realtime.json'
+  );
+  var groupedTimeseriesConfig = require(
+    '../../node_modules/performanceplatform-client.js/test/fixtures/module-config-grouped-time-series.json'
+  );
+
+  var sectionConfig = require(
+    '../../node_modules/performanceplatform-client.js/test/fixtures/module-config-section.json'
+  );
+
+
   dashboardConfig.modules = [];
   dashboardConfig.modules[0] = kpiConfig;
   dashboardConfig.modules[1] = singleTimeseriesConfig;
@@ -200,24 +218,6 @@ describe('slides', function () {
 
   });
 
-  describe('Grouped timeseries', function () {
-
-    beforeEach(function (done) {
-      this.slidesPromise.then(function () {
-        done();
-      });
-
-      this.dashboardConfig.modules = [];
-      this.dashboardConfig.modules[0] = groupedTimeseriesConfig;
-      this.deferred.resolve(this.dashboardConfig);
-    });
-
-    it('does not render a slide', function () {
-      $(this.container).find('.slide').length.should.equal(1);
-      $(this.container).find('.error-message').should.exist;
-    });
-
-  });
 
   describe('Realtime usage slide', function () {
 
@@ -377,5 +377,33 @@ describe('slides', function () {
     });
   });
 
+  describe('Grouped timeseries', function () {
+
+    beforeEach(function (done) {
+      this.slidesPromise.then(function () {
+        done();
+      });
+
+      this.dashboardConfig.modules = [];
+      this.dashboardConfig.modules[0] = groupedTimeseriesConfig;
+      this.deferred.resolve(this.dashboardConfig);
+    });
+
+    it('shows the most recent figure, if available', function () {
+      $(this.container).find('.t-slide-grouped_timeseries .t-main-figure')
+        .should.have.text('82.9%');
+    });
+
+    it('shows the most recent figure, if available', function () {
+      $(this.container).find('.t-slide-grouped_timeseries:first .t-main-figure')
+        .should.have.text('13033');
+    });
+
+    it('shows change since last period', function () {
+      $(this.container).find('.t-slide-grouped_timeseries .t-change')
+        .should.have.text('+11.57% on previous month');
+    });
+
+  });
 });
 

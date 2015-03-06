@@ -2,7 +2,7 @@ var container = document.getElementById('fs');
 
 var dashboardSlug = window.location.pathname.split('/').pop();
 
-require('./slides')(dashboardSlug, container).then(function () {
+require('./slides').setup(dashboardSlug, container).then(function () {
   require('./carousel').setup(document);
 });
 
