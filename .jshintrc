@@ -9,7 +9,8 @@
     "afterEach"  : false,
     "sinon"      : false,
     "document"   : false,
-    "window"     : false
+    "window"     : false,
+    "GOVUK"      : true
   },
 
   /* Enforcing options */
