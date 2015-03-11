@@ -5,7 +5,6 @@ var _ = require('lodash'),
   individualSlideData = require('./individual-slide-data'),
   RealtimeUpdate = require('./realtime-update'),
   Delta = require('performanceplatform-client.js').Delta,
-  Table = require('performanceplatform-client.js').Table;
 
 module.exports = {
 
@@ -75,7 +74,6 @@ module.exports = {
   createSlideDataArray: function (modules) {
     var flattenedModules = [];
     _.each(modules, function (module) {
-      var groupedSeriesData;
 
       if (module.moduleConfig['module-type'] === 'section') {
         _.each(module.modules, function (nestedModule) {
@@ -84,11 +82,19 @@ module.exports = {
           nestedModule.dataAsDelta = new Delta(nestedModule);
           flattenedModules.push(nestedModule);
         });
-      } else if (module.moduleConfig['module-type'] === 'grouped_timeseries') {
-        groupedSeriesData = new Table(module);
-     //TODO TRANSFORM HERE
       } else {
         module.dataAsDelta = new Delta(module);
+
+        if (_.isArray(module.dataAsDelta.data) === false) {
+          _.each(module.dataAsDelta.data, function (series, key) {
+            var seriesData = _.cloneDeep(module);
+            seriesData.moduleConfig.title += ': ' +
+              _.pluck(_.where(module.axes.y, {'groupId': key}), 'label');
+            seriesData.dataAsDelta.data = series;
+            flattenedModules.push(seriesData);
+          });
+        }
+
         flattenedModules.push(module);
       }
     });
