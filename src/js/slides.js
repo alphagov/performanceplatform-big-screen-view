@@ -4,7 +4,7 @@ var _ = require('lodash'),
   renderer = require('./renderer'),
   individualSlideData = require('./individual-slide-data'),
   RealtimeUpdate = require('./realtime-update'),
-  Delta = require('performanceplatform-client.js').Delta,
+  Delta = require('performanceplatform-client.js').Delta;
 
 module.exports = {
 

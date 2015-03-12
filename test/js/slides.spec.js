@@ -46,7 +46,7 @@ describe('slides', function () {
     this.deferred = Q.defer();
     this.container = document.createElement('div');
     this.stub = sinon.stub(Dashboard.prototype, 'resolve').returns(this.deferred.promise);
-    this.slidesPromise = slides('example-slug', this.container);
+    this.slidesPromise = slides.setup('example-slug', this.container);
 
     // make a fresh copy of the JSON object for each test
     this.dashboardConfig = _.cloneDeep(dashboardConfig);
@@ -390,8 +390,8 @@ describe('slides', function () {
     });
 
     it('shows the most recent figure, if available', function () {
-      $(this.container).find('.t-slide-grouped_timeseries .t-main-figure')
-        .should.have.text('82.9%');
+      $(this.container).find('.t-slide-grouped_timeseries:first .t-main-figure')
+        .should.have.text('13033');
     });
 
     it('shows the most recent figure, if available', function () {
@@ -400,8 +400,8 @@ describe('slides', function () {
     });
 
     it('shows change since last period', function () {
-      $(this.container).find('.t-slide-grouped_timeseries .t-change')
-        .should.have.text('+11.57% on previous month');
+      $(this.container).find('.t-slide-grouped_timeseries:first .t-change')
+        .should.have.text('−5.01% on previous a month');
     });
 
   });

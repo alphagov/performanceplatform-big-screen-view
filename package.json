@@ -49,6 +49,6 @@
     "govuk_frontend_toolkit": "3.0.1",
     "lodash": "2.4.1",
     "mustache": "0.8.2",
-    "performanceplatform-client.js": "git+https://github.com/alphagov/performanceplatform-client.js.git#release_149"
+    "performanceplatform-client.js": "git+https://github.com/alphagov/performanceplatform-client.js.git#release_157"
   }
 }
