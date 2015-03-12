@@ -46,9 +46,9 @@ describe('slides', function () {
     this.deferred = Q.defer();
     this.container = document.createElement('div');
     this.stub = sinon.stub(Dashboard.prototype, 'resolve').returns(this.deferred.promise);
-    this.slidesPromise = slides('example-slug', this.container);
+    this.slidesPromise = slides.setup('example-slug', this.container);
 
-    // make a fresh clone of the JSON object for each test
+    // make a fresh copy of the JSON object for each test
     this.dashboardConfig = _.cloneDeep(dashboardConfig);
 
   });
@@ -213,31 +213,11 @@ describe('slides', function () {
     it('shows change since last period', function () {
       $(this.container).find('.t-slide-user_satisfaction_graph .t-change')
         .should.have.text('−0.46% on previous 7 days');
-        $(this.container).find('.t-slide-user_satisfaction_graph .t-change').length.should.equal(1);
+      $(this.container).find('.t-slide-user_satisfaction_graph .t-change').length.should.equal(1);
     });
 
   });
 
-  describe('Grouped timeseries', function () {
-
-    beforeEach(function (done) {
-      this.slidesPromise.then(function () {
-        done();
-      });
-
-      this.dashboardConfig.modules = [];
-      this.dashboardConfig.modules[0] = groupedTimeseriesConfig;
-      this.deferred.resolve(this.dashboardConfig);
-    });
-
-    it('does not render a slide', function () {
-      $(this.container).find('.slide').length
-        .should.equal(1);
-      $(this.container).find('.error-message')
-          .should.exist;
-    });
-
-  });
 
   describe('Realtime usage slide', function () {
 
@@ -305,7 +285,8 @@ describe('slides', function () {
           this.getModuleStub = sinon
             .stub(Dashboard.prototype, 'getModule')
             .returns(this.moduleDeferred.promise);
-          this.clock.tick(150000); // 5 mins have now elapsed, enough time for 2 polls to have happened
+          // 5 mins have now elapsed, enough time for 2 polls to have happened
+          this.clock.tick(150000);
           this.moduleConfig.dataSource.data[0].unique_visitors = 999;
           this.moduleDeferred.resolve(this.moduleConfig);
         });
@@ -338,9 +319,7 @@ describe('slides', function () {
       });
 
       it('error should be there', function () {
-
-        $(this.container).find('.error-message')
-          .should.exist;
+        $(this.container).find('.error-message').should.exist;
       });
 
     });
@@ -356,9 +335,7 @@ describe('slides', function () {
       });
 
       it('error should be there', function () {
-
-        $(this.container).find('.error-message')
-          .should.exist;
+        $(this.container).find('.error-message').should.exist;
       });
 
     });
@@ -373,9 +350,7 @@ describe('slides', function () {
       });
 
       it('error should not be there', function () {
-
-        $(this.container).find('.error-message')
-          .should.not.exist;
+        $(this.container).find('.error-message').should.not.exist;
       });
 
     });
@@ -392,9 +367,7 @@ describe('slides', function () {
       });
 
       it('error should be there', function () {
-
-        $(this.container).find('.error-message')
-          .should.exist;
+        $(this.container).find('.error-message').should.exist;
       });
 
       it('should be on screen', function () {
@@ -404,5 +377,33 @@ describe('slides', function () {
     });
   });
 
+  describe('Grouped timeseries', function () {
+
+    beforeEach(function (done) {
+      this.slidesPromise.then(function () {
+        done();
+      });
+
+      this.dashboardConfig.modules = [];
+      this.dashboardConfig.modules[0] = groupedTimeseriesConfig;
+      this.deferred.resolve(this.dashboardConfig);
+    });
+
+    it('shows the most recent figure, if available', function () {
+      $(this.container).find('.t-slide-grouped_timeseries:first .t-main-figure')
+        .should.have.text('13033');
+    });
+
+    it('shows the most recent figure, if available', function () {
+      $(this.container).find('.t-slide-grouped_timeseries:first .t-main-figure')
+        .should.have.text('13033');
+    });
+
+    it('shows change since last period', function () {
+      $(this.container).find('.t-slide-grouped_timeseries:first .t-change')
+        .should.have.text('−5.01% on previous a month');
+    });
+
+  });
 });
 

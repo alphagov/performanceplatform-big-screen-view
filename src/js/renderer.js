@@ -33,6 +33,7 @@ module.exports = {
         return fs.readFileSync(__dirname + '/templates/kpi.mus', 'utf8');
       }
       case 'single_timeseries':
+      case 'grouped_timeseries':
       case 'user_satisfaction_graph': {
         return fs.readFileSync(__dirname + '/templates/single_timeseries.mus', 'utf8');
       }

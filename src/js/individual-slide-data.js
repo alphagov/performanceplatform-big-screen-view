@@ -1,12 +1,10 @@
 var NO_DATA = 'no data';
-var Delta = require('performanceplatform-client.js').Delta;
 
 module.exports = {
 
-  prepareModuleForRender: function (dashboardConfig, module) {
+  prepareModuleForRender: function (dashboardConfig, slideData) {
     var data,
       deptCode;
-    var moduleDataAsDelta = new Delta(module);
 
     deptCode = (dashboardConfig.department && dashboardConfig.department.abbr &&
     dashboardConfig.department.abbr.toLowerCase()) || '';
@@ -14,12 +12,12 @@ module.exports = {
       departmentCode: deptCode,
       dashboardSlug: dashboardConfig.slug,
       dashboardTitle: dashboardConfig.title,
-      moduleType: module.moduleConfig['module-type'],
-      slug: module.moduleConfig.slug,
-      title: module.moduleConfig.title,
-      latest: moduleDataAsDelta.data[0] || null,
-      previous: moduleDataAsDelta.data[1] || null,
-      sectionTitle: module.moduleConfig.sectionTitle || ''
+      moduleType: slideData.moduleConfig['module-type'],
+      slug: slideData.moduleConfig.slug,
+      title: slideData.moduleConfig.title,
+      latest: slideData.data[0] || null,
+      previous: slideData.data[1] || null,
+      sectionTitle: slideData.moduleConfig.sectionTitle || ''
     };
 
     data.displaySlide = this.displaySlide(data);
