@@ -15,13 +15,10 @@ module.exports = {
 
     currentTime = this.getCurrentTime();
     elapsedMinutes = Math.round(((currentTime - this.startTime) / 1000) / 60);
-    window.ga('send', {
-      'hitType': 'event',
-      'eventCategory': window.location.pathname,
-      'eventAction': 'minutes-since-page-load',
-      'eventLabel': '',
-      'eventValue': elapsedMinutes,
-      'nonInteraction': true
+
+    GOVUK.analytics.trackEvent(window.location.pathname, 'minutes-since-page-load', {
+      value: elapsedMinutes,
+      nonInteraction: true // event will not affect bounce rate
     });
   }
 };
