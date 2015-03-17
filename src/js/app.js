@@ -4,7 +4,10 @@ var dashboardSlug = window.location.pathname.split('/').pop();
 
 require('./slides').setup(dashboardSlug, container).then(function () {
   require('./carousel').setup(document);
-});
+}).catch(function (error) {
+  throw error;
+})
+.done();
 
 var fullscreen = require('./fullscreen')(container);
 document.getElementById('full-screen-toggle').onclick = fullscreen;
