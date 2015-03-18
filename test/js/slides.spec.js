@@ -391,17 +391,12 @@ describe('slides', function () {
 
     it('shows the most recent figure, if available', function () {
       $(this.container).find('.t-slide-grouped_timeseries:first .t-main-figure')
-        .should.have.text('13033');
-    });
-
-    it('shows the most recent figure, if available', function () {
-      $(this.container).find('.t-slide-grouped_timeseries:first .t-main-figure')
-        .should.have.text('13033');
+        .should.have.text('2629544');
     });
 
     it('shows change since last period', function () {
       $(this.container).find('.t-slide-grouped_timeseries:first .t-change')
-        .should.have.text('−5.01% on previous a month');
+        .should.have.text('+21.90% on previous a month');
     });
 
   });

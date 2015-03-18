@@ -50,7 +50,6 @@ module.exports = {
         }
 
         slideContainer.innerHTML = html;
-
       }, this), function (err) {
         slideContainer.classList.add('on-screen');
         slideContainer.innerHTML = renderer.renderErrorSlide(
@@ -83,14 +82,17 @@ module.exports = {
           flattenedModules.push(nestedModule);
         });
       } else {
+        // we can't currently support grouped-timeseries with a group mapping this should be done
+        // in the transform
+        if (module.moduleConfig['group-mapping']) {
+          return;
+        }
         module.dataAsDelta = new Delta(module);
-
         if (_.isArray(module.dataAsDelta.data) === false) {
-          _.each(module.dataAsDelta.data, function (series, key) {
+          _.each(module.axes.y, function (yAxis) {
             var seriesData = _.cloneDeep(module);
-            seriesData.moduleConfig.title += ': ' +
-              _.pluck(_.where(module.axes.y, {'groupId': key}), 'label');
-            seriesData.dataAsDelta.data = series;
+            seriesData.moduleConfig.title += ': ' + yAxis.label;
+            seriesData.dataAsDelta.data = seriesData.dataAsDelta.data[yAxis.groupId];
             flattenedModules.push(seriesData);
           });
         }
