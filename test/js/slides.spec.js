@@ -396,7 +396,7 @@ describe('slides', function () {
 
     it('shows change since last period', function () {
       $(this.container).find('.t-slide-grouped_timeseries:first .t-change')
-        .should.have.text('+21.90% on previous a month');
+        .should.have.text('+21.90% on previous month');
     });
 
   });
