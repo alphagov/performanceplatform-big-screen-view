@@ -124,4 +124,26 @@
     line-height: 1.2;
   }
 
+  // used for table slides right now I don't think we'll be using tables anywhere else
+  table {
+    width: 90%;
+
+    td {
+      padding: 0.3em;
+      @include v-font-size(3.3);
+    }
+
+    a {
+      color: $white;
+    }
+
+    tbody {
+      border-top: 0.1em solid $white;
+
+      tr {
+        border-bottom: 0.025em solid $white;
+      }
+    }
+  }
+
 }

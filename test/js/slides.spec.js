@@ -27,9 +27,11 @@ describe('slides', function () {
   var groupedTimeseriesConfig = require(
     '../../node_modules/performanceplatform-client.js/test/fixtures/module-config-grouped-time-series.json'
   );
-
   var sectionConfig = require(
     '../../node_modules/performanceplatform-client.js/test/fixtures/module-config-section.json'
+  );
+  var tableConfig = require(
+    '../../node_modules/performanceplatform-client.js/test/fixtures/module-config-table.json'
   );
 
 
@@ -38,6 +40,7 @@ describe('slides', function () {
   dashboardConfig.modules[1] = singleTimeseriesConfig;
   dashboardConfig.modules[2] = userSatisfactionConfig;
   dashboardConfig.modules[3] = realtimeConfig;
+  dashboardConfig.modules[4] = tableConfig;
 
 
   /* ============= SETUP FOR ALL TESTS ============== */
@@ -298,6 +301,54 @@ describe('slides', function () {
 
       });
 
+    });
+
+  });
+
+  describe('Table slide', function () {
+
+    beforeEach(function (done) {
+      this.slidesPromise.then(function () {
+        done();
+      });
+      this.deferred.resolve(this.dashboardConfig);
+    });
+
+    it('renders a table', function () {
+      $(this.container).find('.t-slide-table')
+        .should.exist;
+    });
+
+    it('renders a table header', function () {
+      $(this.container).find('.t-slide-table thead')
+        .should.exist;
+
+      $(this.container).find('.t-slide-table thead').should.contain('Url');
+      $(this.container).find('.t-slide-table thead').should.contain('Date');
+    });
+
+    it('renders a table body', function () {
+      $(this.container).find('.t-slide-table tbody')
+        .should.exist;
+
+      $(this.container).find('.t-slide-table tbody tr:nth-of-type(1)')
+        .should.contain('/performance/dft-renew-driving-licence');
+      $(this.container).find('.t-slide-table tbody tr:nth-of-type(2)')
+        .should.contain('/performance/tax-disc');
+      $(this.container).find('.t-slide-table tbody tr:nth-of-type(3)')
+        .should.contain('/performance');
+      $(this.container).find('.t-slide-table tbody tr:nth-of-type(4)')
+        .should.contain('/performance/dwp-jobseekers-allowance-jsa-new-claims');
+      $(this.container).find('.t-slide-table tbody tr:nth-of-type(5)')
+        .should.contain('/performance/register-to-vote');
+    });
+
+    it('limits the table columns to two', function () {
+      $(this.container).find('.t-slide-table thead td').length.should.equal(2);
+    });
+
+    it('limits the rows to 5', function () {
+      $(this.container).find('.t-slide-table tbody tr').length.should.equal(5);
     });
 
   });
