@@ -1,4 +1,5 @@
 var NO_DATA = 'no data';
+var _ = require('lodash');
 
 module.exports = {
 
@@ -15,10 +16,17 @@ module.exports = {
       moduleType: slideData.moduleConfig['module-type'],
       slug: slideData.moduleConfig.slug,
       title: slideData.moduleConfig.title,
-      latest: slideData.data[0] || null,
-      previous: slideData.data[1] || null,
       sectionTitle: slideData.moduleConfig.sectionTitle || ''
     };
+
+    return data;
+  },
+
+  prepareDeltaModuleForRender: function (dashboardConfig, slideData) {
+    var data = this.prepareModuleForRender(dashboardConfig, slideData);
+
+    data.latest = slideData.data[0] || null;
+    data.previous = slideData.data[1] || null;
 
     data.displaySlide = this.displaySlide(data);
     if (data.displaySlide) {
@@ -28,6 +36,30 @@ module.exports = {
         data.longValue = true;
       }
     }
+    return data;
+  },
+
+  prepareTableModuleForRender: function (dashboardConfig, slideData) {
+    var data = this.prepareModuleForRender(dashboardConfig, slideData);
+
+    data.displaySlide = true;
+    data.tableHead = _.map(slideData.data, function (item) {
+      return item[0];
+    });
+
+    var tr = [];
+    _.each(slideData.data[0], function (row, rowIndex) {
+      var td = [];
+      _.each(slideData.data, function (col) {
+        td.push({td: col[rowIndex]});
+      });
+      if (rowIndex > 0) {
+        tr.push({tr: td});
+      }
+    });
+
+    data.tableBody = tr;
+
     return data;
   },
 

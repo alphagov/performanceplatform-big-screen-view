@@ -4,7 +4,8 @@ var _ = require('lodash'),
   renderer = require('./renderer'),
   individualSlideData = require('./individual-slide-data'),
   RealtimeUpdate = require('./realtime-update'),
-  Delta = require('performanceplatform-client.js').Delta;
+  Delta = require('performanceplatform-client.js').Delta,
+  Table = require('performanceplatform-client.js').Table;
 
 module.exports = {
 
@@ -15,7 +16,8 @@ module.exports = {
       then(_.bind(function (dashboardConfig) {
         var html = '',
           realTimeUpdates = [],
-          preparedSlides,
+          deltaSlides,
+          tableSlides,
           slidesToRender,
           supported = Module.prototype.supported;
 
@@ -25,14 +27,25 @@ module.exports = {
           return _.contains(supported, module.moduleConfig['module-type']) === false;
         });
 
-        preparedSlides = _.map(dashboardConfig.modules, function (module) {
+        deltaSlides = _.map(_.where(dashboardConfig.modules, 'dataAsDelta'), function (module) {
           return {
             module: module,
-            data: individualSlideData.prepareModuleForRender(dashboardConfig, module.dataAsDelta)
+            data: individualSlideData.prepareDeltaModuleForRender(
+              dashboardConfig, module.dataAsDelta
+            )
           };
         });
 
-        slidesToRender = _.filter(preparedSlides, function (slide) {
+        tableSlides = _.map(_.where(dashboardConfig.modules, 'dataAsTable'), function (module) {
+          return {
+            module: module,
+            data: individualSlideData.prepareTableModuleForRender(
+              dashboardConfig, module.dataAsTable
+            )
+          };
+        });
+
+        slidesToRender = _.filter(deltaSlides.concat(tableSlides), function (slide) {
           return slide.data.displaySlide;
         });
 
@@ -81,6 +94,15 @@ module.exports = {
           nestedModule.dataAsDelta = new Delta(nestedModule);
           flattenedModules.push(nestedModule);
         });
+      } else if (module.moduleConfig['module-type'] === 'table') {
+        module.dataAsTable = new Table(module, {
+          rowsLimit: 5,
+          colsLimit: 1
+        });
+        module.dataAsTable.data = module.dataAsTable.render();
+
+        flattenedModules.push(module);
+
       } else {
         // we can't currently support grouped-timeseries with a group mapping this should be done
         // in the transform

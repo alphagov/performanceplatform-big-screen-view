@@ -1,0 +1,22 @@
+<div>
+  <table>
+    <thead>
+      <tr>
+        {{#tableHead}}
+          <td>{{.}}</td>
+        {{/tableHead}}
+      </tr>
+    </thead>
+    <tbody>
+      {{#tableBody}}
+          <tr>
+          {{#tr}}
+            {{#td}}
+              <td>{{{td}}}</td>
+            {{/td}}
+          {{/tr}}
+          </tr>
+      {{/tableBody}}
+    </tbody>
+  </table>
+</div>

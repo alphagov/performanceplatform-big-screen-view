@@ -37,6 +37,9 @@ module.exports = {
       case 'user_satisfaction_graph': {
         return fs.readFileSync(__dirname + '/templates/single_timeseries.mus', 'utf8');
       }
+      case 'table': {
+        return fs.readFileSync(__dirname + '/templates/table.mus', 'utf8');
+      }
       default : {
         return '';
       }
