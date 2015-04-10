@@ -85,16 +85,9 @@ module.exports = {
    */
   createSlideDataArray: function (modules) {
     var flattenedModules = [];
-    _.each(modules, function (module) {
 
-      if (module.moduleConfig['module-type'] === 'section') {
-        _.each(module.modules, function (nestedModule) {
-          nestedModule.moduleConfig.sectionTitle = module.moduleConfig.title;
-
-          nestedModule.dataAsDelta = new Delta(nestedModule);
-          flattenedModules.push(nestedModule);
-        });
-      } else if (module.moduleConfig['module-type'] === 'table') {
+    function applyDataView (module) {
+      if (module.moduleConfig['module-type'] === 'table') {
         module.dataAsTable = new Table(module, {
           rowsLimit: 5,
           colsLimit: 1
@@ -121,6 +114,18 @@ module.exports = {
 
         flattenedModules.push(module);
       }
+    }
+
+    _.each(modules, function (module) {
+
+      if (module.moduleConfig['module-type'] === 'section') {
+        _.each(module.modules, function (nestedModule) {
+          applyDataView(nestedModule);
+        });
+      } else {
+        applyDataView(module);
+      }
+
     });
     return flattenedModules;
   }
