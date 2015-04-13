@@ -120,6 +120,7 @@ module.exports = {
 
       if (module.moduleConfig['module-type'] === 'section') {
         _.each(module.modules, function (nestedModule) {
+          nestedModule.moduleConfig.sectionTitle = module.moduleConfig.title;
           applyDataView(nestedModule);
         });
       } else {
