@@ -116,17 +116,20 @@ module.exports = {
       }
     }
 
-    _.each(modules, function (module) {
-
-      if (module.moduleConfig['module-type'] === 'section') {
+    function iterateSubModules (module) {
+      if (module.modules && module.modules.length) {
+        module.moduleConfig.titles = [];
         _.each(module.modules, function (nestedModule) {
           nestedModule.moduleConfig.sectionTitle = module.moduleConfig.title;
-          applyDataView(nestedModule);
+          iterateSubModules(nestedModule);
         });
       } else {
         applyDataView(module);
       }
+    }
 
+    _.each(modules, function (module) {
+      iterateSubModules(module);
     });
     return flattenedModules;
   }
