@@ -106,11 +106,12 @@ module.exports = {
         if (_.isArray(module.dataAsDelta.data) === false) {
           _.each(module.axes.y, function (yAxis) {
             var seriesData = _.cloneDeep(module);
-            seriesData.moduleConfig.title += ': ' + yAxis.label;
+            seriesData.moduleConfig.title += ' (' + yAxis.label + ')';
             seriesData.dataAsDelta.data = seriesData.dataAsDelta.data[yAxis.groupId];
             flattenedModules.push(seriesData);
           });
         }
+
 
         flattenedModules.push(module);
       }
@@ -118,9 +119,8 @@ module.exports = {
 
     function iterateSubModules (module) {
       if (module.modules && module.modules.length) {
-        module.moduleConfig.titles = [];
         _.each(module.modules, function (nestedModule) {
-          nestedModule.moduleConfig.sectionTitle = module.moduleConfig.title;
+          nestedModule.moduleConfig.title = module.moduleConfig.title + ': ' + nestedModule.moduleConfig.title;
           iterateSubModules(nestedModule);
         });
       } else {

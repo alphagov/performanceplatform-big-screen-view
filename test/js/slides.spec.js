@@ -72,10 +72,9 @@ describe('slides', function () {
       this.deferred.resolve(this.dashboardConfig);
     });
 
-    it('Should add the section title to each module in a section', function () {
-      $(this.container).find('.section-title').length.should.equal(2);
-      $(this.container).find('.section-title').first().text()
-        .should.equal('Public digital service');
+    it('Should add the section title to the title on the slide', function () {
+      $(this.container).find('.module-title').first().text()
+        .should.equal('Public digital service: User satisfaction');
     });
 
   });
