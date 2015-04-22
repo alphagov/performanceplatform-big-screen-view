@@ -1,0 +1,6 @@
+{
+  "destinationPath": ".",
+  "sassPath": "./src/sass",
+  "jsPath": "./src/js",
+  "testPath": "./test/js"
+}
