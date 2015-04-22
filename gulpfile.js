@@ -7,11 +7,7 @@ var jscs = require('gulp-jscs');
 var jshint = require('gulp-jshint');
 var brfs = require('brfs');
 
-var config = {
-  sassPath: './src/sass',
-  jsPath: './src/js',
-  testPath: './test/js'
-};
+var config = require('./config.json');
 
 gulp.task('jscs', function () {
   return gulp.src(config.jsPath + '/*.js')
@@ -27,9 +23,9 @@ gulp.task('jshint', function () {
 gulp.task('sass', function () {
   gulp.src(config.sassPath + '/*.scss')
     .pipe(sass())
-    .pipe(gulp.dest('./css'));
+    .pipe(gulp.dest(config.destinationPath + '/css'));
   gulp.src(config.sassPath + '/fonts/*.woff')
-    .pipe(gulp.dest('./css/fonts/'));
+    .pipe(gulp.dest(config.destinationPath + '/css/fonts/'));
 });
 
 gulp.task('browserify', function () {
@@ -42,7 +38,12 @@ gulp.task('browserify', function () {
       this.end();
     })
     .pipe(source('app.js'))
-    .pipe(gulp.dest('./js/'));
+    .pipe(gulp.dest(config.destinationPath + '/js/'));
+});
+
+gulp.task('copy_index', function () {
+  gulp.src('./index.html')
+    .pipe(gulp.dest(config.destinationPath + '/'));
 });
 
 gulp.task('connect', function () {
@@ -60,6 +61,6 @@ gulp.task('watch', function () {
 
 gulp.task('lint', ['jscs', 'jshint']);
 gulp.task('test', ['lint']);
-gulp.task('production', ['sass', 'browserify']);
+gulp.task('production', ['sass', 'browserify', 'copy_index']);
 gulp.task('default', ['sass', 'browserify', 'lint']);
 gulp.task('server', ['production', 'connect', 'watch']);
