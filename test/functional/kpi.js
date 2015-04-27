@@ -1,11 +1,10 @@
 module.exports = {
   selectors: {
     dashboardTitle: '.dashboard-title',
-    moduleType: '[data-module-slug="transactions-per-year"].on-screen',
+    moduleType: '[data-module-slug="cost-per-transaction"].on-screen',
     moduleTitle: '.module-title',
     moduleFigure: '.t-main-figure',
-    modulePeriod: '.year-ending',
-    moduleDelta: '.t-change'
+    modulePeriod: '.year-ending'
   },
 
   beforeEach: function (client) {
@@ -14,9 +13,8 @@ module.exports = {
     // as that's the last element to animate onto the screen
     // this only seems to be required for phantomjs
     client
-      .url('http://localhost:8080/transactions-per-year')
-      .waitForElementVisible(this.selectors.moduleType + ' ' + this.selectors.dashboardTitle, 5000)
-      .saveScreenshot('./fail.png');
+      .url('http://localhost:8080/kpi')
+      .waitForElementVisible(this.selectors.moduleType + ' ' + this.selectors.dashboardTitle, 5000);
   },
 
   'Sections exist': function (client) {
@@ -34,15 +32,15 @@ module.exports = {
     client
       .assert
         .containsText(this.selectors.moduleType + ' ' + this.selectors.moduleTitle,
-          'Transactions per year')
+          'Cost per transaction')
         .end();
   },
 
-  'Has a total': function (client) {
+  'Has a cost': function (client) {
     client
       .assert
         .containsText(this.selectors.moduleType + ' ' + this.selectors.moduleFigure,
-          '248k')
+          '£59.00')
         .end();
   },
 
@@ -51,14 +49,6 @@ module.exports = {
       .assert
         .containsText(this.selectors.moduleType + ' ' + this.selectors.modulePeriod,
           'for the year ending 30 September 2014')
-        .end();
-  },
-
-  'Has a delta': function (client) {
-    client
-      .assert
-        .containsText(this.selectors.moduleType + ' ' + this.selectors.moduleDelta,
-          '+2.65% from the year ending 30 June 2014')
         .end();
   }
 

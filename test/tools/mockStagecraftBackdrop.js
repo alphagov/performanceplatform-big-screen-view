@@ -1,22 +1,22 @@
 var http = require('http'),
   hock = require('hock');
 
-var costPerTransaction = require('../functional/responses/cost-per-transaction-dashboard.json');
-var transactionsPerYear = require('../functional/responses/transactions-per-year-dashboard.json');
+var kpiDashboard = require('../functional/responses/kpi-dashboard.json');
+var kpiWithDeltaDashboard = require('../functional/responses/kpi-with-delta-dashboard.json');
 var transactionServicesData = require('../functional/responses/transactional-services-data.json');
 
 var mock = hock.createHock();
 
 mock
-  .get('/public/dashboards?slug=cost-per-transaction')
+  .get('/public/dashboards?slug=kpi')
   .max(Infinity)
-  .reply(200, costPerTransaction, {
+  .reply(200, kpiDashboard, {
     'Access-Control-Allow-Origin': '*'
   });
 mock
-  .get('/public/dashboards?slug=transactions-per-year')
+  .get('/public/dashboards?slug=kpi-with-delta')
   .max(Infinity)
-  .reply(200, transactionsPerYear, {
+  .reply(200, kpiWithDeltaDashboard, {
     'Access-Control-Allow-Origin': '*'
   });
 mock
