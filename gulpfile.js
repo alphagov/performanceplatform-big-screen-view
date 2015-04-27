@@ -99,6 +99,10 @@ gulp.task('test:functional', function (cb) {
   runSequence('start:mock', 'test:server', 'nightwatch', 'stop:mock', 'stop:test:server', cb);
 });
 
+gulp.task('server-and-mock', function (cb) {
+  runSequence('start:mock', 'test:server', cb);
+});
+
 gulp.task('production', ['sass', 'browserify', 'copy_index']);
 gulp.task('server', ['production', 'connect', 'watch']);
 gulp.task('test:server', ['production', 'connect']);
