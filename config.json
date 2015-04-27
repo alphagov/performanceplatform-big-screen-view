@@ -2,5 +2,11 @@
   "destinationPath": ".",
   "sassPath": "./src/sass",
   "jsPath": "./src/js",
-  "testPath": "./test/js"
+  "testPath": "./test/js",
+  "stagecraft": {
+    "url": "http://localhost:1337/"
+  },
+  "backdrop": {
+    "url": "http://localhost:1337/"
+  }
 }

@@ -5,12 +5,16 @@ var _ = require('lodash'),
   individualSlideData = require('./individual-slide-data'),
   RealtimeUpdate = require('./realtime-update'),
   Delta = require('performanceplatform-client.js').Delta,
-  Table = require('performanceplatform-client.js').Table;
+  Table = require('performanceplatform-client.js').Table,
+  config = require('../../config.json');
 
 module.exports = {
 
   setup: function (dashboardSlug, slideContainer) {
-    var dashboard = new Dashboard(dashboardSlug);
+    var dashboard = new Dashboard(dashboardSlug, {
+      stagecraft: config.stagecraft,
+      backdrop: config.backdrop
+    });
 
     return dashboard.resolve().
       then(_.bind(function (dashboardConfig) {
@@ -120,7 +124,8 @@ module.exports = {
     function iterateSubModules (module) {
       if (module.modules && module.modules.length) {
         _.each(module.modules, function (nestedModule) {
-          nestedModule.moduleConfig.title = module.moduleConfig.title + ': ' + nestedModule.moduleConfig.title;
+          nestedModule.moduleConfig.title =
+            module.moduleConfig.title + ': ' + nestedModule.moduleConfig.title;
           iterateSubModules(nestedModule);
         });
       } else {

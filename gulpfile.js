@@ -6,6 +6,9 @@ var source = require('vinyl-source-stream');
 var jscs = require('gulp-jscs');
 var jshint = require('gulp-jshint');
 var brfs = require('brfs');
+var nightwatch = require('gulp-nightwatch');
+var developServer = require( 'gulp-develop-server' );
+var runSequence = require('run-sequence');
 
 var config = require('./config.json');
 
@@ -41,6 +44,22 @@ gulp.task('browserify', function () {
     .pipe(gulp.dest(config.destinationPath + '/js/'));
 });
 
+gulp.task('nightwatch', function (cb) {
+  gulp.src('')
+    .pipe(nightwatch({
+      configFile: './nightwatch.json',
+      cliArgs: {
+        env: 'phantomjs'
+      }
+    }))
+    .on('error', function (err) {
+      cb(err);
+    })
+    .on('end', function () {
+      cb();
+    });
+});
+
 gulp.task('copy_index', function () {
   gulp.src('./index.html')
     .pipe(gulp.dest(config.destinationPath + '/'));
@@ -53,14 +72,34 @@ gulp.task('connect', function () {
   });
 });
 
+gulp.task('stop:test:server', function (cb) {
+  connect.serverClose();
+  cb();
+});
+
+gulp.task('start:mock', function (cb) {
+  developServer.listen( { path: './test/tools/mockStagecraftBackdrop.js' } );
+  cb();
+});
+
+gulp.task('stop:mock', function (cb) {
+  developServer.kill();
+  cb();
+});
+
 gulp.task('watch', function () {
   gulp.watch(config.sassPath + '/**/*.scss', ['sass']);
   gulp.watch(config.jsPath + '/**/*.js', ['browserify']);
   gulp.watch(config.jsPath + '/**/*.mus', ['browserify']);
 });
 
-gulp.task('lint', ['jscs', 'jshint']);
-gulp.task('test', ['lint']);
-gulp.task('production', ['sass', 'browserify', 'copy_index']);
 gulp.task('default', ['sass', 'browserify', 'lint']);
+
+gulp.task('test:functional', function (cb) {
+  runSequence('start:mock', 'test:server', 'nightwatch', 'stop:mock', 'stop:test:server', cb);
+});
+
+gulp.task('production', ['sass', 'browserify', 'copy_index']);
 gulp.task('server', ['production', 'connect', 'watch']);
+gulp.task('test:server', ['production', 'connect']);
+gulp.task('lint', ['jscs', 'jshint']);
