@@ -15,8 +15,7 @@ module.exports = {
     // this only seems to be required for phantomjs
     client
       .url('http://localhost:8080/kpi-with-delta')
-      .waitForElementVisible(this.selectors.moduleType + ' ' + this.selectors.dashboardTitle, 5000)
-      .saveScreenshot('./fail.png');
+      .waitForElementVisible(this.selectors.moduleType + ' ' + this.selectors.dashboardTitle, 5000);
   },
 
   'Sections exist': function (client) {
@@ -30,7 +29,7 @@ module.exports = {
       .end();
   },
 
-  'Has a title': function (client) {
+  'Has a figure': function (client) {
     client
       .assert
         .containsText(this.selectors.moduleType + ' ' + this.selectors.moduleTitle,
