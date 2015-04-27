@@ -14,6 +14,7 @@ module.exports = {
     // this only seems to be required for phantomjs
     client
       .url('http://localhost:8080/kpi')
+      .resizeWindow(1000, 800)
       .waitForElementVisible(this.selectors.moduleType + ' ' + this.selectors.dashboardTitle, 5000);
   },
 

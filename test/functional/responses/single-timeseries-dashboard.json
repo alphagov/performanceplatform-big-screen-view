@@ -1,0 +1,78 @@
+{
+ "business-model": "Taxpayers",
+ "customer-type": "Individuals",
+ "description": "Data for new claims for regular payments for carers who help look after someone with substantial caring needs for at least 35 hours a week.",
+ "title": "Carer's Allowance: new claims",
+ "tagline": "",
+ "modules": [
+  {
+   "info": [
+    "Data source: Google Analytics"
+   ],
+   "value-attribute": "avgSessionDuration:sum",
+   "description": "",
+   "module-type": "single_timeseries",
+   "title": "Average time taken to complete the transaction",
+   "axes": {
+    "y": [
+     {
+      "label": "Average session time"
+     }
+    ],
+    "x": {
+     "format": "date",
+     "key": [
+      "_start_at",
+      "_end_at"
+     ],
+     "label": "Date"
+    }
+   },
+   "modules": [],
+   "format-options": {
+    "type": "duration",
+    "unit": "m"
+   },
+   "slug": "time-taken-to-complete-transaction",
+   "data-source": {
+    "data-group": "carers-allowance",
+    "data-type": "time-taken-to-complete",
+    "query-params": {
+     "duration": 52,
+     "collect": [
+      "avgSessionDuration:sum"
+     ],
+     "group_by": [
+      "stage"
+     ],
+     "period": "week",
+     "filter_by": [
+      "stage:thank-you"
+     ]
+    }
+   }
+  }
+ ],
+ "slug": "carers-allowance",
+ "description-extra": "",
+ "costs": "New claims involve several interactions with the applicant and third parties such as medical staff to, for example, assemble evidence to validate identity and eligibility in line with benefit regulations and fraud avoidance strategies, issue NI numbers if the applicant does not have one, and deal with any appeals against the decisions made.<br>The costs are for the financial year 2012 to 2013 and represent the total cost for all aspects of processing an application up to the point that payments commence. The ongoing costs of maintaining the claim after this point have been separately shown against the transaction type 'CA: claims maintained'.<br>The costs of these various interactions are aggregated and averaged to give a cost per application and this is presented on a fully absorbed basis but excluding investment (change) costs. DWP is introducing changes to improve the accuracy of IT cost apportionment.",
+ "strapline": "Dashboard",
+ "published": true,
+ "department": {
+  "slug": "department-for-work-pensions",
+  "abbr": "DWP",
+  "title": "Department for Work and Pensions"
+ },
+ "page-type": "dashboard",
+ "other-notes": "The number of transactions given is the annual number of applications processed, whether successful or not.",
+ "relatedPages": {
+  "improve-dashboard-message": true,
+  "transaction": {
+   "url": "https://www.gov.uk/apply-carers-allowance",
+   "type": "transaction",
+   "title": "Apply for Carer's Allowance"
+  },
+  "other": []
+ },
+ "dashboard-type": "high-volume-transaction"
+}

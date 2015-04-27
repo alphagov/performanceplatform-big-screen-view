@@ -40,14 +40,6 @@
         "phantomjs.binary.path" : "./node_modules/phantomjs/bin/phantomjs"
       }
     },
-    "phantom2" : {
-      "desiredCapabilities" : {
-        "browserName" : "phantomjs",
-        "javascriptEnabled" : true,
-        "acceptSslCerts" : true,
-        "phantomjs.binary.path" : "/usr/local/bin/phantomjs"
-      }
-    },
     "chrome": {
       "desiredCapabilities" : {
         "browserName" : "chrome"
