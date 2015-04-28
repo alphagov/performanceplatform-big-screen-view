@@ -5,10 +5,13 @@ var kpiDashboard = require('../functional/responses/kpi-dashboard.json');
 var kpiWithDeltaDashboard = require('../functional/responses/kpi-with-delta-dashboard.json');
 var realtimeDashboard = require('../functional/responses/realtime-dashboard.json');
 var singleTimeSeriesDashboard = require('../functional/responses/single-timeseries-dashboard.json');
+var groupedTimeSeriesDashboard =
+  require('../functional/responses/grouped-timeseries-dashboard.json');
 
 var transactionServicesData = require('../functional/responses/transactional-services-data.json');
 var realtimeData = require('../functional/responses/realtime-data.json');
 var singleTimeSeriesData = require('../functional/responses/single-timeseries-data.json');
+var groupedTimeSeriesData = require('../functional/responses/grouped-timeseries-data.json');
 
 var mock = hock.createHock();
 
@@ -37,6 +40,12 @@ mock
   .reply(200, singleTimeSeriesDashboard, {
     'Access-Control-Allow-Origin': '*'
   });
+mock
+  .get('/public/dashboards?slug=grouped-timeseries')
+  .max(Infinity)
+  .reply(200, groupedTimeSeriesDashboard, {
+    'Access-Control-Allow-Origin': '*'
+  });
 
 //data-requests
 mock
@@ -57,6 +66,13 @@ mock
   .get('/data/carers-allowance/time-taken-to-complete?duration=52&collect=avgSessionDuration%3Asum&group_by=stage&period=week&filter_by=stage%3Athank-you&flatten=true')
   .any()
   .reply(200, singleTimeSeriesData, {
+    'Access-Control-Allow-Origin': '*'
+  });
+
+mock
+  .get('/data/carers-allowance/transactions-by-channel?duration=52&collect=count%3Asum&group_by=channel&period=week&flatten=true')
+  .any()
+  .reply(200, groupedTimeSeriesData, {
     'Access-Control-Allow-Origin': '*'
   });
 
