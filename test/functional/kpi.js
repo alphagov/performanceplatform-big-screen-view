@@ -1,7 +1,7 @@
 module.exports = {
   selectors: {
     dashboardTitle: '.dashboard-title',
-    moduleType: '[data-module-slug="cost-per-transaction"].on-screen',
+    moduleType: '.t-slide-kpi.on-screen',
     moduleTitle: '.module-title',
     moduleFigure: '.t-main-figure',
     modulePeriod: '.year-ending'
@@ -18,6 +18,10 @@ module.exports = {
       .waitForElementVisible(this.selectors.moduleType + ' ' + this.selectors.dashboardTitle, 5000);
   },
 
+  after: function (client) {
+    client.end();
+  },
+
   'Sections exist': function (client) {
     client
       .assert
@@ -25,32 +29,28 @@ module.exports = {
       .assert
         .visible(this.selectors.moduleType + ' ' + this.selectors.moduleFigure)
       .assert
-        .visible(this.selectors.moduleType + ' ' + this.selectors.modulePeriod)
-      .end();
+        .visible(this.selectors.moduleType + ' ' + this.selectors.modulePeriod);
   },
 
   'Has a title': function (client) {
     client
       .assert
         .containsText(this.selectors.moduleType + ' ' + this.selectors.moduleTitle,
-          'Cost per transaction')
-        .end();
+          'Cost per transaction');
   },
 
   'Has a figure': function (client) {
     client
       .assert
         .containsText(this.selectors.moduleType + ' ' + this.selectors.moduleFigure,
-          '£59.00')
-        .end();
+          '£59.00');
   },
 
   'Has a period': function (client) {
     client
       .assert
         .containsText(this.selectors.moduleType + ' ' + this.selectors.modulePeriod,
-          'for the year ending 30 September 2014')
-        .end();
+          'for the year ending 30 September 2014');
   }
 
 };

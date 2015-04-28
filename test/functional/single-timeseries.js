@@ -1,7 +1,7 @@
 module.exports = {
   selectors: {
     dashboardTitle: '.dashboard-title',
-    moduleType: '[data-module-slug="time-taken-to-complete-transaction"].on-screen',
+    moduleType: '.t-slide-single_timeseries.on-screen',
     moduleTitle: '.module-title',
     moduleFigure: '.t-main-figure',
     moduleDelta: '.t-change'
@@ -18,6 +18,10 @@ module.exports = {
       .waitForElementVisible(this.selectors.moduleType + ' ' + this.selectors.dashboardTitle, 5000);
   },
 
+  after: function (client) {
+    client.end();
+  },
+
   'Sections exist': function (client) {
     client
       .assert
@@ -25,32 +29,28 @@ module.exports = {
       .assert
         .visible(this.selectors.moduleType + ' ' + this.selectors.moduleFigure)
       .assert
-        .visible(this.selectors.moduleType + ' ' + this.selectors.moduleDelta)
-      .end();
+        .visible(this.selectors.moduleType + ' ' + this.selectors.moduleDelta);
+  },
+
+  'Has a title': function (client) {
+    client
+      .assert
+        .containsText(this.selectors.moduleType + ' ' + this.selectors.moduleTitle,
+          'Average time taken to complete the transaction');
   },
 
   'Has a figure': function (client) {
     client
       .assert
-        .containsText(this.selectors.moduleType + ' ' + this.selectors.moduleTitle,
-          'Average time taken to complete the transaction')
-        .end();
-  },
-
-  'Has a total': function (client) {
-    client
-      .assert
         .containsText(this.selectors.moduleType + ' ' + this.selectors.moduleFigure,
-          '23m 26s')
-        .end();
+          '23m 26s');
   },
 
   'Has a delta': function (client) {
     client
       .assert
         .containsText(this.selectors.moduleType + ' ' + this.selectors.moduleDelta,
-          '−0.64% on previous 7 days')
-        .end();
+          '−0.64% on previous 7 days');
   }
 
 };
