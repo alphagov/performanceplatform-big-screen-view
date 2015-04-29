@@ -6,9 +6,29 @@ var source = require('vinyl-source-stream');
 var jscs = require('gulp-jscs');
 var jshint = require('gulp-jshint');
 var brfs = require('brfs');
-var nightwatch = require('gulp-nightwatch');
 var developServer = require( 'gulp-develop-server' );
 var runSequence = require('run-sequence');
+var spawn = require('child_process').spawn;
+var nightwatch;
+
+gulp.task('nightwatch', function (cb) {
+  nightwatch = spawn('node_modules/nightwatch/bin/nightwatch', ['--env=phantomjs']);
+
+  nightwatch.stdout.on('data', function (data) {
+    process.stdout.write(data);
+  });
+
+  nightwatch.stderr.on('data', function (data) {
+    process.stdout.write(data);
+  });
+
+  nightwatch.on('close', function (code) {
+    if (code !== 0) {
+      console.log('ps process exited with code ' + code);
+    }
+    cb();
+  });
+});
 
 var config = require('./config.json');
 
@@ -42,22 +62,6 @@ gulp.task('browserify', function () {
     })
     .pipe(source('app.js'))
     .pipe(gulp.dest(config.destinationPath + '/js/'));
-});
-
-gulp.task('nightwatch', function (cb) {
-  gulp.src('')
-    .pipe(nightwatch({
-      configFile: './nightwatch.json',
-      cliArgs: {
-        env: 'phantomjs'
-      }
-    }))
-    .on('error', function (err) {
-      cb(err);
-    })
-    .on('end', function () {
-      cb();
-    });
 });
 
 gulp.task('copy_index', function () {
