@@ -21,4 +21,6 @@ env:
     # NOTE: contains GH_TOKEN=xxx from github user gds-pp-ci
     - NODE_ENV: 'travis'
     - secure: No/n3avJtXkU0GXINqmQS6N5ineT0i2ZLZ0jDnCw5G2oxbxgjBhAHsNnomKwLJMKmTzFZ8GC/e6+14CcBTwn7ytJI5A22xUGA/WmOGzWVs2Xmdb53ddKpE+K5VnYKEzqZyOQZmnCyV0ByoRssnO9W0zwcXpOlbGU9sOPu1Gg7AA=
-script: 'npm test && ./node_modules/gulp/bin/gulp.js test:functional'
+script:
+  - './node_modules/karma/bin/karma start test/karma.conf.js --single-run'
+  - './node_modules/gulp/bin/gulp.js test:functional'
