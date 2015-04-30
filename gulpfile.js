@@ -97,10 +97,26 @@ gulp.task('watch', function () {
   gulp.watch(config.jsPath + '/**/*.mus', ['browserify']);
 });
 
+gulp.task('mock-configs', function (cb) {
+  var config = require('./config.json');
+  var mockEndpoint = 'http://localhost:1337/';
+
+  config.stagecraft.url = mockEndpoint;
+  config.backdrop.url = mockEndpoint;
+
+  require('fs').writeFileSync('./config.json', JSON.stringify(config));
+
+  cb();
+});
+
 gulp.task('default', ['sass', 'browserify', 'lint']);
 
 gulp.task('test:functional', function (cb) {
   runSequence('start:mock', 'test:server', 'nightwatch', 'stop:mock', 'stop:test:server', cb);
+});
+
+gulp.task('test:functional:ci', function () {
+  runSequence('mock-configs', 'test:functional');
 });
 
 gulp.task('server-and-mock', function (cb) {
