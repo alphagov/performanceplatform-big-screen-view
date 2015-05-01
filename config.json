@@ -2,5 +2,11 @@
   "destinationPath": ".",
   "sassPath": "./src/sass",
   "jsPath": "./src/js",
-  "testPath": "./test/js"
+  "testPath": "./test/js",
+  "stagecraft": {
+    "url": "https://stagecraft.production.performance.service.gov.uk/"
+  },
+  "backdrop": {
+    "url": "https://www.performance.service.gov.uk/"
+  }
 }

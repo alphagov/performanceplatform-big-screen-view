@@ -1,0 +1,368 @@
+{
+  "data": [
+    {
+      "_count": 0,
+      "_end_at": "2014-05-05T00:00:00+00:00",
+      "_start_at": "2014-04-28T00:00:00+00:00",
+      "avgSessionDuration:sum": null,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 0,
+      "_end_at": "2014-05-12T00:00:00+00:00",
+      "_start_at": "2014-05-05T00:00:00+00:00",
+      "avgSessionDuration:sum": null,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 0,
+      "_end_at": "2014-05-19T00:00:00+00:00",
+      "_start_at": "2014-05-12T00:00:00+00:00",
+      "avgSessionDuration:sum": null,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2014-05-26T00:00:00+00:00",
+      "_start_at": "2014-05-19T00:00:00+00:00",
+      "avgSessionDuration:sum": 1684509.5081967213,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2014-06-02T00:00:00+00:00",
+      "_start_at": "2014-05-26T00:00:00+00:00",
+      "avgSessionDuration:sum": 1703704.5045045044,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2014-06-09T00:00:00+00:00",
+      "_start_at": "2014-06-02T00:00:00+00:00",
+      "avgSessionDuration:sum": 1676229.0021536252,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2014-06-16T00:00:00+00:00",
+      "_start_at": "2014-06-09T00:00:00+00:00",
+      "avgSessionDuration:sum": 1669000.0,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2014-06-23T00:00:00+00:00",
+      "_start_at": "2014-06-16T00:00:00+00:00",
+      "avgSessionDuration:sum": 1632360.9051892313,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2014-06-30T00:00:00+00:00",
+      "_start_at": "2014-06-23T00:00:00+00:00",
+      "avgSessionDuration:sum": 1680082.0922629857,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2014-07-07T00:00:00+00:00",
+      "_start_at": "2014-06-30T00:00:00+00:00",
+      "avgSessionDuration:sum": 1649484.6153846155,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2014-07-14T00:00:00+00:00",
+      "_start_at": "2014-07-07T00:00:00+00:00",
+      "avgSessionDuration:sum": 1646677.6677667766,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2014-07-21T00:00:00+00:00",
+      "_start_at": "2014-07-14T00:00:00+00:00",
+      "avgSessionDuration:sum": 1607771.7007762878,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2014-07-28T00:00:00+00:00",
+      "_start_at": "2014-07-21T00:00:00+00:00",
+      "avgSessionDuration:sum": 1682960.4851330202,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2014-08-04T00:00:00+00:00",
+      "_start_at": "2014-07-28T00:00:00+00:00",
+      "avgSessionDuration:sum": 1689413.7457044674,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2014-08-11T00:00:00+00:00",
+      "_start_at": "2014-08-04T00:00:00+00:00",
+      "avgSessionDuration:sum": 1674179.1483113067,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2014-08-18T00:00:00+00:00",
+      "_start_at": "2014-08-11T00:00:00+00:00",
+      "avgSessionDuration:sum": 1647956.7272727273,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2014-08-25T00:00:00+00:00",
+      "_start_at": "2014-08-18T00:00:00+00:00",
+      "avgSessionDuration:sum": 1704210.8792846499,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2014-09-01T00:00:00+00:00",
+      "_start_at": "2014-08-25T00:00:00+00:00",
+      "avgSessionDuration:sum": 1664065.6964656964,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2014-09-08T00:00:00+00:00",
+      "_start_at": "2014-09-01T00:00:00+00:00",
+      "avgSessionDuration:sum": 1624103.7735849055,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2014-09-15T00:00:00+00:00",
+      "_start_at": "2014-09-08T00:00:00+00:00",
+      "avgSessionDuration:sum": 1682350.8010680908,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2014-09-22T00:00:00+00:00",
+      "_start_at": "2014-09-15T00:00:00+00:00",
+      "avgSessionDuration:sum": 1652007.399932728,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2014-09-29T00:00:00+00:00",
+      "_start_at": "2014-09-22T00:00:00+00:00",
+      "avgSessionDuration:sum": 1639982.377332412,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2014-10-06T00:00:00+00:00",
+      "_start_at": "2014-09-29T00:00:00+00:00",
+      "avgSessionDuration:sum": 1669962.9984051038,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2014-10-13T00:00:00+00:00",
+      "_start_at": "2014-10-06T00:00:00+00:00",
+      "avgSessionDuration:sum": 1621613.735239279,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2014-10-20T00:00:00+00:00",
+      "_start_at": "2014-10-13T00:00:00+00:00",
+      "avgSessionDuration:sum": 1597152.7141922824,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2014-10-27T00:00:00+00:00",
+      "_start_at": "2014-10-20T00:00:00+00:00",
+      "avgSessionDuration:sum": 1559084.7790507365,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2014-11-03T00:00:00+00:00",
+      "_start_at": "2014-10-27T00:00:00+00:00",
+      "avgSessionDuration:sum": 1854542.0717398592,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2014-11-10T00:00:00+00:00",
+      "_start_at": "2014-11-03T00:00:00+00:00",
+      "avgSessionDuration:sum": 2353093.5374149657,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2014-11-17T00:00:00+00:00",
+      "_start_at": "2014-11-10T00:00:00+00:00",
+      "avgSessionDuration:sum": 2213565.6452066344,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2014-11-24T00:00:00+00:00",
+      "_start_at": "2014-11-17T00:00:00+00:00",
+      "avgSessionDuration:sum": 2275589.560752995,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2014-12-01T00:00:00+00:00",
+      "_start_at": "2014-11-24T00:00:00+00:00",
+      "avgSessionDuration:sum": 2270689.4003978404,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2014-12-08T00:00:00+00:00",
+      "_start_at": "2014-12-01T00:00:00+00:00",
+      "avgSessionDuration:sum": 2115009.708737864,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2014-12-15T00:00:00+00:00",
+      "_start_at": "2014-12-08T00:00:00+00:00",
+      "avgSessionDuration:sum": 2178099.8010610077,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2014-12-22T00:00:00+00:00",
+      "_start_at": "2014-12-15T00:00:00+00:00",
+      "avgSessionDuration:sum": 2149241.1905576466,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2014-12-29T00:00:00+00:00",
+      "_start_at": "2014-12-22T00:00:00+00:00",
+      "avgSessionDuration:sum": 2252312.0393120395,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2015-01-05T00:00:00+00:00",
+      "_start_at": "2014-12-29T00:00:00+00:00",
+      "avgSessionDuration:sum": 2326468.4232538687,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2015-01-12T00:00:00+00:00",
+      "_start_at": "2015-01-05T00:00:00+00:00",
+      "avgSessionDuration:sum": 2235872.6523133307,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2015-01-19T00:00:00+00:00",
+      "_start_at": "2015-01-12T00:00:00+00:00",
+      "avgSessionDuration:sum": 2434349.4203927135,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2015-01-26T00:00:00+00:00",
+      "_start_at": "2015-01-19T00:00:00+00:00",
+      "avgSessionDuration:sum": 2210999.0747166323,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2015-02-02T00:00:00+00:00",
+      "_start_at": "2015-01-26T00:00:00+00:00",
+      "avgSessionDuration:sum": 2187562.2258138997,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2015-02-09T00:00:00+00:00",
+      "_start_at": "2015-02-02T00:00:00+00:00",
+      "avgSessionDuration:sum": 2261761.520737327,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2015-02-16T00:00:00+00:00",
+      "_start_at": "2015-02-09T00:00:00+00:00",
+      "avgSessionDuration:sum": 2298659.985333659,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2015-02-23T00:00:00+00:00",
+      "_start_at": "2015-02-16T00:00:00+00:00",
+      "avgSessionDuration:sum": 2237061.4122327203,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2015-03-02T00:00:00+00:00",
+      "_start_at": "2015-02-23T00:00:00+00:00",
+      "avgSessionDuration:sum": 2339898.269410664,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2015-03-09T00:00:00+00:00",
+      "_start_at": "2015-03-02T00:00:00+00:00",
+      "avgSessionDuration:sum": 2298014.4777662875,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2015-03-16T00:00:00+00:00",
+      "_start_at": "2015-03-09T00:00:00+00:00",
+      "avgSessionDuration:sum": 2209478.2717910074,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2015-03-23T00:00:00+00:00",
+      "_start_at": "2015-03-16T00:00:00+00:00",
+      "avgSessionDuration:sum": 1438721.4519788253,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2015-03-30T00:00:00+00:00",
+      "_start_at": "2015-03-23T00:00:00+00:00",
+      "avgSessionDuration:sum": 1437139.6731054978,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2015-04-06T00:00:00+00:00",
+      "_start_at": "2015-03-30T00:00:00+00:00",
+      "avgSessionDuration:sum": 1413854.94302433,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2015-04-13T00:00:00+00:00",
+      "_start_at": "2015-04-06T00:00:00+00:00",
+      "avgSessionDuration:sum": 1406720.3192550715,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2015-04-20T00:00:00+00:00",
+      "_start_at": "2015-04-13T00:00:00+00:00",
+      "avgSessionDuration:sum": 1415256.2305295952,
+      "stage": "thank-you"
+    },
+    {
+      "_count": 1.0,
+      "_end_at": "2015-04-27T00:00:00+00:00",
+      "_start_at": "2015-04-20T00:00:00+00:00",
+      "avgSessionDuration:sum": 1406149.0015360983,
+      "stage": "thank-you"
+    }
+  ]
+}
