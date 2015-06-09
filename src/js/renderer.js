@@ -29,6 +29,7 @@ module.exports = {
     /* Must call readFileSync with string literals not variables as first param so that BRFS can
      inline the template during build - https://github.com/substack/brfs/issues/36 */
     switch (slideType) {
+      case 'bar_chart_with_number':
       case 'kpi': {
         return fs.readFileSync(__dirname + '/templates/kpi.mus', 'utf8');
       }
