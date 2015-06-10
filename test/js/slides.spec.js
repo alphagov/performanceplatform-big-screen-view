@@ -441,7 +441,7 @@ describe('slides', function () {
 
     it('shows the most recent figure, if available', function () {
       $(this.container).find('.t-slide-grouped_timeseries:first .t-main-figure')
-        .should.have.text('2629544');
+        .should.have.text('2.63m');
     });
 
     it('shows change since last period', function () {
