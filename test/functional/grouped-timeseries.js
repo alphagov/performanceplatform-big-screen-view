@@ -38,7 +38,7 @@ module.exports = {
     client
       .assert
         .containsText(this.selectors.moduleType + ' ' + this.selectors.moduleFigure,
-          '2171')
+          '2,171')
         .end();
   },
 
