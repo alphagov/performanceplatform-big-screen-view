@@ -116,7 +116,6 @@ gulp.task('test:functional', function (cb) {
 });
 
 gulp.task('test:functional:ci', function () {
-  runSequence('mock-configs', 'test:functional');
 });
 
 gulp.task('server-and-mock', function (cb) {
