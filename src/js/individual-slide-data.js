@@ -32,8 +32,13 @@ module.exports = {
     if (data.displaySlide) {
       data = this.missingDataFlags(data);
       data = this.dataConversions(data);
-      if (data.latest.formatted_value && data.latest.formatted_value.length > 5) {
-        data.longValue = true;
+      if (data.latest) {
+        if (data.latest.formatted_value && data.latest.formatted_value.length > 5) {
+          data.longValue = true;
+        }
+        if (data.latest.formatted_value === 'no data') {
+          data.latest.formatted_value = 'Latest data not available';
+        }
       }
     }
     return data;
@@ -68,9 +73,7 @@ module.exports = {
 
     // we're going to display realtime slides even if prior data was missing, as data might reappear
     if (data.moduleType !== 'realtime') {
-      if (((data.latest === null) && (data.previous === null)) ||
-        ((data.latest.formatted_value === NO_DATA) &&
-        (data.previous.formatted_value === NO_DATA))) {
+      if ((data.latest === null) && (data.previous === null)) {
         returnVal = false;
       }
     }
@@ -102,10 +105,13 @@ module.exports = {
 
   dataConversions: function (data) {
     //TODO - move to client / API
-    if (data.latest.formatted_change_from_previous &&
-      data.latest.formatted_change_from_previous.change === '0%') {
-      data.latest.formatted_change_from_previous.change = 'No change';
+    if (data.latest) {
+      if (data.latest.formatted_change_from_previous &&
+        data.latest.formatted_change_from_previous.change === '0%') {
+        data.latest.formatted_change_from_previous.change = 'No change';
+      }
     }
+
     return data;
   }
 

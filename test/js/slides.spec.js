@@ -169,8 +169,9 @@ describe('slides', function () {
         this.deferred.resolve(this.dashboardConfig);
       });
 
-      it('doesn\'t show the slide', function () {
-        $(this.container).find('.t-slide-kpi').length.should.equal(0);
+      it('it shows that there is no data', function () {
+        $(this.container).find('.t-main-figure').first()
+        .should.have.text('Latest data not available');
       });
 
     });
