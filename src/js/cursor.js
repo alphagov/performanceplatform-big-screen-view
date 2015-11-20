@@ -5,13 +5,13 @@ module.exports = function (container) {
   setTimer = function () {
     clearTimeout(timer);
     timer = setTimeout(function () {
-      container.classList.add('is-inactive');
+      container.className += " is-inactive";
     }, 5000);
   };
 
   setTimer();
   container.addEventListener && container.addEventListener('mousemove', function () {
-    container.classList.remove('is-inactive');
+    container.className = container.className.replace(" is-inactive", "");
     setTimer();
   });
 
