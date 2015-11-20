@@ -68,7 +68,7 @@ module.exports = {
 
         slideContainer.innerHTML = html;
       }, this), function (err) {
-        slideContainer.classList.add('on-screen');
+        slideContainer.className += " on-screen";
         slideContainer.innerHTML = renderer.renderErrorSlide(
           {
             title: dashboardSlug,
