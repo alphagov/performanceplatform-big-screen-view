@@ -1,5 +1,5 @@
 {
-  "destinationPath": ".",
+  "destinationPath": "./public/performance/big-screen",
   "sassPath": "./src/sass",
   "jsPath": "./src/js",
   "testPath": "./test/js",
