@@ -1,8 +1,7 @@
 # Performance Platform big screen view
 
 This project is a JavaScript application for displaying data from
-the Performance Platform fullscreen on a large display, for example
-in building receptions and offices.
+the Performance Platform fullscreen on a large display, like maybe in building receptions and offices and teleprompters and cinemas before the films start and also turbo-trons and maybe even Google Glass where space is at a premium so you need big numbers to really get the message across.
 
 The style was inspired by @demotive's [gds-performance-slides](https://github.com/Demotive/gds-performance-slides) ([available on Heroku](https://gds-screens-slides.herokuapp.com/)).
 
@@ -14,7 +13,7 @@ This project uses [gulp.js][gulp] to build. Install it with `npm install -g gulp
 
 ## Running the app
 
-The app uses the [Performance Platform client](https://github.com/alphagov/performanceplatform-client.js). Run npm install to make sure you have the up-to-date copy.
+The app uses the [Performance Platform client](https://github.com/alphagov/performanceplatform-client.js). Run `npm install` to make sure you have an up-to-date version of this repo which hasn't been touched in 2 years.
 
 To start a development server:
 
