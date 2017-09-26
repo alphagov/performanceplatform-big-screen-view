@@ -22,10 +22,10 @@ To start a development server:
 gulp server
 ```
 
-Then hit a valid dashboard URL eg. http://localhost:8080/carers-allowance
+Then hit a valid dashboard URL eg. http://localhost:8080/public/performance/big-screen/carers-allowance
 
 To run the tests:
 
 ```
-npm tests
+npm test
 ```
