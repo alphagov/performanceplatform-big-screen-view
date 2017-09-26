@@ -6,6 +6,36 @@ the Performance Platform fullscreen on a large display, like maybe in building r
 The style was inspired by @demotive's [gds-performance-slides](https://github.com/Demotive/gds-performance-slides) ([available on Heroku](https://gds-screens-slides.herokuapp.com/)).
 
 ## Setup
+
+#### getting the right version of node
+
+Firstly, it is recommended that you set up Node Version Manager on your host. See the ([nvm]) README for installation instructions.
+
+[nvm]: https://github.com/creationix/nvm
+
+Now install the specified version of node (specified in the `.nvmrc` file [e.g. 6.11.2]) using nvm:
+
+```bash
+nvm install 6.11.2
+```
+
+To check you have the correct version of node installed:
+
+```bash
+nvm which
+
+Found '/Users/<username>/<path to>/performanceplatform-big-screen-view/.nvmrc' with version <6.11.2>
+/Users/<username>/.nvm/versions/node/v6.11.2/bin/node
+```
+
+Now tell nvm to use the version of node specified in the `.nvmrc` file:
+
+```bash
+nvm use
+```
+
+#### installing dependencies
+
 This project uses [gulp.js][gulp] to build. Install it with `npm install -g gulp` or just run
 `npm install` in this project and use the local version at `./node_modules/gulp/bin/gulp.js`.
 
