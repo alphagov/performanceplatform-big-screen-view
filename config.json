@@ -4,7 +4,7 @@
   "jsPath": "./src/js",
   "testPath": "./test/js",
   "stagecraft": {
-    "url": "https://stagecraft.production.performance.service.gov.uk/"
+    "url": "https://stagecraft-staging.cloudapps.digital/"
   },
   "backdrop": {
     "url": "https://www.performance.service.gov.uk/"
