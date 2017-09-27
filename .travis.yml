@@ -9,11 +9,6 @@ notifications:
 cache:
   directories:
     - node_modules
-branches:
-  only:
-    - master
-after_success:
-  - ./.travis_scripts/push_release_tag.sh
 after_failure:
   - 'cat /home/travis/build/alphagov/performanceplatform-big-screen-view/npm-debug.log'
 env:
@@ -23,4 +18,3 @@ env:
     - secure: No/n3avJtXkU0GXINqmQS6N5ineT0i2ZLZ0jDnCw5G2oxbxgjBhAHsNnomKwLJMKmTzFZ8GC/e6+14CcBTwn7ytJI5A22xUGA/WmOGzWVs2Xmdb53ddKpE+K5VnYKEzqZyOQZmnCyV0ByoRssnO9W0zwcXpOlbGU9sOPu1Gg7AA=
 script:
   - './node_modules/karma/bin/karma start test/karma.conf.js --single-run'
-  - './node_modules/gulp/bin/gulp.js test:functional:ci'
