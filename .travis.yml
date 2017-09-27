@@ -1,6 +1,6 @@
 language: node_js
 
-sudo: false
+sudo: true
 
 node_js:
   - '6'
@@ -22,11 +22,11 @@ env:
   global:
     - PAAS_USER: pp-deploy@digital.cabinet-office.gov.uk
     - PAAS_SERVICE: performance-platform-big-screen-view
+    - NODE_ENV: 'travis'
+    # NOTE: contains GH_TOKEN=xxx from github user gds-pp-ci
+    - secure: No/n3avJtXkU0GXINqmQS6N5ineT0i2ZLZ0jDnCw5G2oxbxgjBhAHsNnomKwLJMKmTzFZ8GC/e6+14CcBTwn7ytJI5A22xUGA/WmOGzWVs2Xmdb53ddKpE+K5VnYKEzqZyOQZmnCyV0ByoRssnO9W0zwcXpOlbGU9sOPu1Gg7AA=
     # PAAS_PASSWORD
     - secure: RmfBaE+gQBD5m1giSQQfpbMRUBfWczrhk7uD1f7rGOfbyhJDmR/tD/SUjcJihID57+GNMQxgoKB6gY/TujhpPc+WYaoV1vQ5M4iTg/AlPojWTAkXxmuRvtbzQRD3pliMYiD0iM0MuEJDUi1jI4RXb9bYY/IsrY2UvOOtfn7lAWI=
-    # NOTE: contains GH_TOKEN=xxx from github user gds-pp-ci
-    - NODE_ENV: 'travis'
-    - secure: No/n3avJtXkU0GXINqmQS6N5ineT0i2ZLZ0jDnCw5G2oxbxgjBhAHsNnomKwLJMKmTzFZ8GC/e6+14CcBTwn7ytJI5A22xUGA/WmOGzWVs2Xmdb53ddKpE+K5VnYKEzqZyOQZmnCyV0ByoRssnO9W0zwcXpOlbGU9sOPu1Gg7AA=
 
 script:
   - './node_modules/karma/bin/karma start test/karma.conf.js --single-run'
@@ -41,7 +41,7 @@ deploy:
     on:
       branch: staging
 
- - provider: script
+  - provider: script
     script: etc/deploy.sh production
     skip_cleanup: true
     on:
