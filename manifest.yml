@@ -1,0 +1,7 @@
+---
+applications:
+- name: performance-platform-big-screen-view
+  buildpack: nodejs_buildpack
+  command: ./node_modules/gulp/bin/gulp.js server
+  memory: 256M
+  no-route: true

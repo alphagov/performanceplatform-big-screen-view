@@ -4,7 +4,7 @@
   "description": "This project is a JavaScript application for displaying data from the Performance Platform fullscreen on a large display, for example in building receptions and offices.",
   "private": true,
   "engines": {
-    "node": "6.11.2"
+    "node": "6.11.1"
   },
   "scripts": {
     "test": "./node_modules/karma/bin/karma start test/karma.conf.js --single-run"
