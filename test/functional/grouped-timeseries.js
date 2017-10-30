@@ -51,7 +51,7 @@ module.exports = {
           'Number of transactions by channel (Digital)')
       .assert
         .containsText(this.selectors.moduleType + ' ' + this.selectors.moduleFigure,
-          '3843')
+          '3,843')
         .end();
   }
 
