@@ -12,7 +12,7 @@ module.exports = {
     // as that's the last element to animate onto the screen
     // this only seems to be required for phantomjs
     client
-      .url('http://localhost:8080/realtime')
+      .url('http://localhost:8080/performance/big-screen/realtime')
       .resizeWindow(1000, 800)
       .waitForElementVisible(this.selectors.moduleType + ' ' + this.selectors.dashboardTitle, 5000);
   },
