@@ -97,6 +97,12 @@ gulp.task('watch', function () {
   gulp.watch(config.jsPath + '/**/*.mus', ['browserify']);
 });
 
+/**
+ * ¡Note!
+ * This task _rewrites the config.json file_.
+ * It is a hacky solution to get the functional tests to run on the
+ * continuous integration environment.
+ */
 gulp.task('mock-configs', function (cb) {
   var config = require('./config.json');
   var mockEndpoint = 'http://localhost:1337/';
@@ -109,14 +115,18 @@ gulp.task('mock-configs', function (cb) {
   cb();
 });
 
+/**
+ * ¡Note!
+ * These tests, if run locally, will rewrite the root-level `config.json` file.
+ *
+ * The tests should pass, but you will have to checkout the original config file
+ * again otherwise the app will be using the wrong urls for stagecraft and backdrop.
+ */
+gulp.task('test:functional:ci', function (cb) {
+  runSequence('mock-configs', 'start:mock', 'test:server', 'nightwatch', 'stop:mock', 'stop:test:server', cb);
+});
+
 gulp.task('default', ['sass', 'browserify', 'lint']);
-
-gulp.task('test:functional', function (cb) {
-  runSequence('start:mock', 'test:server', 'nightwatch', 'stop:mock', 'stop:test:server', cb);
-});
-
-gulp.task('test:functional:ci', function () {
-});
 
 gulp.task('server-and-mock', function (cb) {
   runSequence('start:mock', 'test:server', cb);
