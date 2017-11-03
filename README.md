@@ -58,3 +58,9 @@ To run the tests:
 ```
 npm test
 ```
+
+**Note**
+
+There are a set of functional tests that are intended only to be run on the continuous integration environment. They _can_ be run locally, but the side effect is that they rewrite the root-level `config.json` file, so you will need to revert it after running the tests.
+
+These tests are not run locally by default
