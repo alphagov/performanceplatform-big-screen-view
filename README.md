@@ -13,10 +13,10 @@ Firstly, it is recommended that you set up Node Version Manager on your host. Se
 
 [nvm]: https://github.com/creationix/nvm
 
-Now install the specified version of node (specified in the `.nvmrc` file [e.g. 6.11.1]) using nvm:
+Now install the specified version of node (specified in the `.nvmrc` file [e.g. 6.11.2]) using nvm:
 
 ```bash
-nvm install 6.11.1
+nvm install 6.11.2
 ```
 
 To check you have the correct version of node installed:
@@ -24,7 +24,7 @@ To check you have the correct version of node installed:
 ```bash
 nvm which
 
-Found '/Users/<username>/<path to>/performanceplatform-big-screen-view/.nvmrc' with version <6.11.1>
+Found '/Users/<username>/<path to>/performanceplatform-big-screen-view/.nvmrc' with version <6.11.2>
 /Users/<username>/.nvm/versions/node/v6.11.1/bin/node
 ```
 
@@ -58,3 +58,9 @@ To run the tests:
 ```
 npm test
 ```
+
+**Note**
+
+There are a set of functional tests that are intended only to be run on the continuous integration environment. They _can_ be run locally, but the side effect is that they rewrite the root-level `config.json` file, so you will need to revert it after running the tests.
+
+These tests are not run locally by default
