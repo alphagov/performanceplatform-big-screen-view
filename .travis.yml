@@ -30,7 +30,6 @@ env:
 
 script:
   - './node_modules/karma/bin/karma start test/karma.conf.js --single-run'
-  - './node_modules/gulp/bin/gulp.js test:functional:ci'
 
 before_deploy:
   - chmod +x etc/deploy.sh
